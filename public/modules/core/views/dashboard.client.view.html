@@ -1,16 +1,25 @@
 <div class="wrapper wrapper-content" data-ng-controller="DashboardController" data-ng-init="find()">
 <div class="row">
-   <div class="col-lg-3">
-        <div class="widget style1 red-bg">
-            <div class="row">
-                <div class="col-xs-4">
-                    <i class="fa fa-bell fa-4x"></i>
-                </div>
-                <div class="col-xs-8 text-right">
-                    <span> Active Outages </span>
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Welcome <span data-ng-bind="authentication.user.displayName"></span>
+                   <!--  <small class="m-l-sm">Hitachi Data Systems</small> -->
+                </h5>
+                <div ibox-tools></div>
+            </div>
+            <div class="ibox-content">
 
-                    <h2 class="font-bold">2</h2>
-                </div>
+                <p>
+                    <strong>0</strong> notices have been opened in the last 24 hours. To update any active notice, you can select it from the dashboard below. 
+                     </p>
+
+                <p>
+                    <small>
+                        Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
+                        Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.
+                    </small>
+                </p>
             </div>
         </div>
     </div>
@@ -19,29 +28,30 @@
   <div class="col-lg-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>Notices</h5>
-
-                <div ibox-tools></div>
+             <h5>Active Notices</h5> &nbsp
+             <div class="label label-danger">2</div>
             </div>
             <div class="ibox-content">
 
-                <table class="table table-hover table-striped">
+                <table class="table table-hover table-bordered">
                     <thead>
                     <tr>
+                        <th>Priority</th>
+                        <th>Ticket #</th>
                         <th>Title</th>
-                        <th>Description</th>
                         <th>Services Impacted</th>
                         <th>Status</th>
-                        <th>Priority</th>
+                        
                     </tr>
                     </thead>
                     <tbody>
                     <tr data-ng-repeat="notice in notices">
+                        <td>{{notice.priority}}</td>
+                        <td>{{notice.ticket_number}}</td>
                         <td>{{notice.title}}</td>
-                        <td>{{notice.brief_description}}</td>
                         <td>{{notice.services_impacted}}</td>
                         <td><small class="label label-primary">{{notice.status}}</small></td>
-                        <td>{{notice.priority}}</td>
+                        
                     </tr>
                     </tbody>
                 </table>
