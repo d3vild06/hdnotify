@@ -79,7 +79,7 @@ angular.module('core').service('Menus', [
 		};
 
 		// Add menu item object
-		this.addMenuItem = function(menuId, menuItemTitle, menuItemURL, menuItemType, menuItemUIRoute, isPublic, roles, position, iconClass) {
+		this.addMenuItem = function(menuId, menuItemTitle, menuItemURL, iconClass, menuItemType, menuItemUIRoute, isPublic, roles, position) {
 			// Validate that the menu exists
 			this.validateMenuExistance(menuId);
 
@@ -87,13 +87,13 @@ angular.module('core').service('Menus', [
 			this.menus[menuId].items.push({
 				title: menuItemTitle,
 				link: menuItemURL,
+				iconClass: iconClass, //|| 'fa-laptop',
 				menuItemType: menuItemType || 'item',
 				menuItemClass: menuItemType,
 				uiRoute: menuItemUIRoute || ('/' + menuItemURL),
 				isPublic: ((isPublic === null || typeof isPublic === 'undefined') ? this.menus[menuId].isPublic : isPublic),
 				roles: ((roles === null || typeof roles === 'undefined') ? this.menus[menuId].roles : roles),
-				position: position || 0,
-                iconClass: iconClass || 'fa-laptop',
+				position: position || 0,               
 				items: [],
 				shouldRender: shouldRender
 			});
