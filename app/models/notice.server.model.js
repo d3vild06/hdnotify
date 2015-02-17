@@ -16,7 +16,8 @@ var NoticeSchema = new Schema({
 	},
     notice_type: {
         type: String,
-        enum: ['outage', 'informational']
+        enum: ['outage', 'informational'],
+        required: true
     },
     status: {
         type: String,
@@ -27,29 +28,43 @@ var NoticeSchema = new Schema({
         default: 60
     },
     ticket_number: {
-        type: String
+        type: String,
+        required: true
     },
     priority: {
         type: Number,
-        enum: ['1', '2']
+        enum: ['1', '2'],
+        required: true
     },
     title: {
-        type: String
+        type: String,
+        required: true
     },
-    services_impacted: {
-        type: String
+    services_affected: {
+        type: String,
+        required: true
     },
     brief_description: {
-        type: String
+        type: String,
+        required: true
     },
     biz_impact: {
+        type: String,
+        required: true
+    },
+    status_update: {
+        type: String
+    },
+    resolution: {
         type: String
     },
     regions_affected: {
-        type: String
+        type: String,
+        required: true
     },
     outage_start_time: {
-        type: Date
+        type: Date,
+        required: true
     },
     outage_end_time: {
         typ: Date
