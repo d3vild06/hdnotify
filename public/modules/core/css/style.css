@@ -1551,7 +1551,7 @@ table.dataTable thead .sorting:after {
 }
 /* PEACE */
 .pace .pace-progress {
-    background: #1ab394;
+    background: #FF0000;
     position: fixed;
     z-index: 2000;
     top: 0px;
