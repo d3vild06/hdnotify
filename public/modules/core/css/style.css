@@ -1691,7 +1691,7 @@ table.dataTable thead .sorting:after {
 }
 .form-control:focus,
 .single-line:focus {
-    border-color: #1ab394;
+    border-color: #ff0000;
 }
 .has-success .form-control {
     border-color: #1ab394;
@@ -4597,7 +4597,7 @@ body.rtls.top-navigation .footer.fixed {
 }
 .skin-1 .nav-header {
     background: #0e9aef;
-    background: url('patterns/header-profile-skin-1.png');
+    /*background: url('patterns/header-profile-skin-1.png');*/
 }
 .skin-1.mini-navbar .nav-second-level {
     background: #3e495f;
@@ -4618,7 +4618,7 @@ body.rtls.top-navigation .footer.fixed {
     color: #fff;
 }
 .skin-1 .navbar-minimalize {
-    background: #0e9aef;
+    background: #ff0000;
     border-color: #0e9aef;
 }
 body.skin-1 {
