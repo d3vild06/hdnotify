@@ -4,6 +4,8 @@
 angular.module('notices').run(['Menus',
 	function(Menus) {
 		// Set top bar menu items
-		Menus.addMenuItem('topbar', 'New Notice', 'notices/create', 'fa-paper-plane-o');
+		// order of parameters
+		// menuId, menuItemTitle, menuItemURL, iconClass, menuItemType, menuItemUIRoute, isPublic, roles, position
+		Menus.addMenuItem('topbar', 'New Notice', 'notices/create', 'fa-pencil');
 	}
 ]);

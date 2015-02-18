@@ -344,7 +344,7 @@ body.mini-navbar .logo-element {
 }
 body.mini-navbar .nav-header {
     padding: 0;
-    background-color: #1ab394;
+    background-color: #ff0000;
 }
 body.mini-navbar #page-wrapper {
     margin: 0 0 0 70px;
@@ -4596,7 +4596,7 @@ body.rtls.top-navigation .footer.fixed {
     background: #0e9aef !important;
 }
 .skin-1 .nav-header {
-    background: #0e9aef;
+    background: #ff0000;
     /*background: url('patterns/header-profile-skin-1.png');*/
 }
 .skin-1.mini-navbar .nav-second-level {
@@ -4619,7 +4619,7 @@ body.rtls.top-navigation .footer.fixed {
 }
 .skin-1 .navbar-minimalize {
     background: #ff0000;
-    border-color: #0e9aef;
+    border-color: #ff0000;
 }
 body.skin-1 {
     background: #3e495f;
