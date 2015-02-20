@@ -88,20 +88,45 @@
                                 </select>
                             </div>
 
-                            <div>
-                                <button class="btn btn-sm btn-danger pull-right m-t-n-xs" type="submit"><strong>Submit</strong></button>
-                            </div>
+                            
                             </div>
                             <!-- right side of the form - where data is autopopulated based on the affected service selected -->
                                <div class="col-sm-8">
                                     <div class="form-group">
-                                        <label>Title</label> <input type="input" placeholder="" class="form-control">
+                                        <label for="title">Title</label> 
+                                        <input type="input" id="title" placeholder="" class="form-control">
                                     </div>
 
-                                   
+                                    <div class="form-group">
+                                        <label for="reason">ITSB Reason</label> 
+                                        <input type="input" id="reason" placeholder="" class="form-control">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="regions">Regions Affected</label> 
+                                        <input type="input" id="regions" placeholder="" class="form-control">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="services">Services Affected</label> 
+                                        <textarea id="services" placeholder="" class="form-control"> </textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="biz_impact">Business Impact</label> 
+                                        <textarea id="biz_impact" placeholder="" class="form-control"> </textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="workaround">Workaround</label> 
+                                        <textarea id="workaround" placeholder="" class="form-control"> </textarea>
+                                    </div>
+
 
                                     <p class="text-center">
-                                        <a href=""><i class="fa fa-sign-in big-icon"></i></a>
+                                        <div>
+                                        <button class="btn btn-sm btn-danger pull-right m-t-n-xs" type="submit"><strong>Submit</strong></button>
+                                        </div>
                                     </p>
                     </div>
                         </form>
