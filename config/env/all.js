@@ -15,7 +15,8 @@ module.exports = {
 			css: [
 				'public/lib/bootstrap/dist/css/bootstrap.css',
                 'public/lib/metisMenu/dist/metisMenu.min.css',
-                'public/lib/fontawesome/css/font-awesome.min.css'
+                'public/lib/fontawesome/css/font-awesome.min.css',
+                'public/lib/angular-bootstrap-datetimepicker/src/css/datetimepicker.css'
 			],
 			js: [
 				'public/lib/jquery/dist/jquery.min.js',
@@ -32,7 +33,9 @@ module.exports = {
 				'public/lib/angular-ui-router/release/angular-ui-router.js',
 				'public/lib/angular-ui-utils/ui-utils.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
-				'public/lib/angular-datepicker/dist/index.js'
+				'public/lib/angular-datepicker/dist/index.js',
+				'public/lib/moment/min/moment.min.js',
+				'public/lib/angular-bootstrap-datetimepicker/src/js/datetimepicker.js'
 			]
 		},
 		css: [
