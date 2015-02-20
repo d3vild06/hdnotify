@@ -21,6 +21,6 @@
     "angular-bootstrap-datetimepicker": "latest"
   },
   "resolutions": {
-    "angular": "1.2.26"
+    "angular": "1.2.28"
   }
 }
