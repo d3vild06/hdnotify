@@ -50,7 +50,7 @@
                         <form role="form" data-ng-submit="createNotice()" novalidate>
                          <div class="form-group">
                          <label for="type">Select Notice Type</label>
-                            <select class="form-control m-b" name="account">
+                            <select class="form-control m-b" name="type">
                                 <option value="outage">Outage</option>
                                 <option value="info">Informational</option>
                             </select>
@@ -70,21 +70,43 @@
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                             </div>
                         </div>
-                            <div class="form-group"><label>Email</label> <input type="email" placeholder="Enter email" class="form-control"></div>
-                            <div class="form-group"><label>Password</label> <input type="password" placeholder="Password" class="form-control"></div>
+                            <div class="form-group">
+                                <label>Ticket #</label> <input type="text" placeholder="IMXXXX" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                 <label for="type">Priority</label>
+                                    <select class="form-control m-b" name="priority">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                 <label for="type">Auto-Update Interval (minutes)</label>
+                                    <select class="form-control m-b" name="update">
+                                        <option value="60">60</option>
+                                        <option value="30">30</option>
+                                </select>
+                            </div>
+
                             <div>
                                 <button class="btn btn-sm btn-danger pull-right m-t-n-xs" type="submit"><strong>Submit</strong></button>
                             </div>
+                            </div>
+                            <!-- right side of the form - where data is autopopulated based on the affected service selected -->
+                               <div class="col-sm-8">
+                                    <div class="form-group">
+                                        <label>Title</label> <input type="input" placeholder="" class="form-control">
+                                    </div>
+
+                                   
+
+                                    <p class="text-center">
+                                        <a href=""><i class="fa fa-sign-in big-icon"></i></a>
+                                    </p>
+                    </div>
                         </form>
-                    </div>
-                    <div class="col-sm-8"><h4>Not a member?</h4>
-
-                        <p>You can create an account:</p>
-
-                        <p class="text-center">
-                            <a href=""><i class="fa fa-sign-in big-icon"></i></a>
-                        </p>
-                    </div>
+                    
+                 
                 </div>
             </div>
         </div>
