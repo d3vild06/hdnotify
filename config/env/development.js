@@ -3,7 +3,7 @@
 module.exports = {
 	db: 'mongodb://localhost/hdnotify-dev',
 	app: {
-		title: 'HDNotify - Development Environment'
+		title: 'HDNotify - DEV Notification Center'
 	},
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || 'APP_ID',

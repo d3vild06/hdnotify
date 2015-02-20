@@ -4596,7 +4596,7 @@ body.rtls.top-navigation .footer.fixed {
     background: #0e9aef !important;
 }
 .skin-1 .nav-header {
-    background: #ff0000;
+    background: #ed5565;
     /*background: url('patterns/header-profile-skin-1.png');*/
 }
 .skin-1.mini-navbar .nav-second-level {
@@ -4618,8 +4618,8 @@ body.rtls.top-navigation .footer.fixed {
     color: #fff;
 }
 .skin-1 .navbar-minimalize {
-    background: #ff0000;
-    border-color: #ff0000;
+    background: #ed5565;
+    border-color: #ed5565;
 }
 body.skin-1 {
     background: #3e495f;
