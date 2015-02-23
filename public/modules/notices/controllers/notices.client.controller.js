@@ -9,7 +9,11 @@ angular.module('notices').controller('NoticesController', ['$scope', '$statePara
 		$scope.create = function() {
 			// Create new Notice object
 			var notice = new Notices ({
-				name: this.name
+				notice_type: this.noticeForm.type,
+				title: this.noticeForm.title
+
+
+
 			});
 
 			// Redirect after save
@@ -62,5 +66,40 @@ angular.module('notices').controller('NoticesController', ['$scope', '$statePara
 				noticeId: $stateParams.noticeId
 			});
 		};
+
+		// mockup notice template data
+		$scope.templates = [
+		{
+			id: 1,
+			title: 'myHDS.com Unavailable',
+			reason: 'Uplanned Outage',
+			regions: 'Global',
+			services: 'myHDS.hds.com',
+			biz_impact: 'SSO to corporate applications via myHDS',
+			workaround: 'none'
+		},
+
+		{
+			id: 2,
+			title: 'portal.hds.com Unavailable',
+			reason: 'Uplanned Outage',
+			regions: 'APAC',
+			services: 'Access to portal.hds.com',
+			biz_impact: 'Access to various applications for partners and customers such as PQM',
+			workaround: 'none'
+		},
+
+		{
+			id: 3,
+			title: 'Identity Access Management',
+			reason: 'Uplanned Outage',
+			regions: 'Global',
+			services: 'Single Sign On (SSO) services',
+			biz_impact: 'SSO to corporate applications via myHDS and portal.hds.com',
+			workaround: 'none'
+		}
+		];
+
 	}
+
 ]);

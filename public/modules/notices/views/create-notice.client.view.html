@@ -1,6 +1,6 @@
-<div class="wrapper wrapper-content animated fadeInRight" data-ng-controller="NoticesController">
+<div class="wrapper wrapper-content" data-ng-controller="NoticesController">
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-12 animated fadeIn">
        <div class="panel panel-danger">
                             <div class="panel-heading">
                                 Latest Notice Created
@@ -37,7 +37,7 @@
 </div>
 
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-12 animated fadeInUp">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <h5>New Notice</h5>
@@ -47,42 +47,42 @@
             <div class="row">
                     <div class="col-sm-4 b-r">
 
-                        <form role="form" data-ng-submit="createNotice()" novalidate>
+                        <form role="form" data-ng-submit="create()" novalidate>
+                         <div class="form-group">
+                         <label for="type">Select Affected Service</label>
+                            <select ng-model="noticeForm" ng-options="t.title for t in templates" class="form-control m-b" name="service">
+                            <option value="">-- select a service --</option>
+                            </select>
+                        </div>
                          <div class="form-group">
                          <label for="type">Select Notice Type</label>
-                            <select class="form-control m-b" name="type">
+                            <select ng-model="type" class="form-control m-b" name="type">
                                 <option value="outage">Outage</option>
                                 <option value="info">Informational</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                         <label for="type">Select Affected Service</label>
-                            <select class="form-control m-b" name="account">
-                                <option value="myHDS">myHDS</option>
-                                <option value="IAM">IAM</option>
-                            </select>
-                        </div>
-                         <div class="form-group" id="data_3">
+                       
+                         <div class="form-group">
                             <label class="font-normal">Outage Start Time</label>
 
                             <div class="input-group date">
-                                <input type="datetime" class="form-control" date-time ng-model="sampleDate" view="hours">
+                                <input type="datetime" class="form-control" id="start-time" date-time ng-model="start_time" view="hours">
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                             </div>
                         </div>
                             <div class="form-group">
-                                <label>Ticket #</label> <input type="text" placeholder="IMXXXX" class="form-control">
+                                <label>Ticket #</label> <input type="text" id="ticket" ng-model="ticket" placeholder="IMXXXX" class="form-control">
                             </div>
                             <div class="form-group">
                                  <label for="type">Priority</label>
-                                    <select class="form-control m-b" name="priority">
+                                    <select ng-model="priority" class="form-control m-b" name="priority">
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                  <label for="type">Auto-Update Interval (minutes)</label>
-                                    <select class="form-control m-b" name="update">
+                                    <select ng-model="update_time" class="form-control m-b" name="update">
                                         <option value="60">60</option>
                                         <option value="30">30</option>
                                 </select>
@@ -94,33 +94,34 @@
                                <div class="col-sm-8">
                                     <div class="form-group">
                                         <label for="title">Title</label> 
-                                        <input type="input" id="title" placeholder="" class="form-control">
+                                        <input ng-model="noticeForm.title" type="input" id="title" placeholder="" class="form-control">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="reason">ITSB Reason</label> 
-                                        <input type="input" id="reason" placeholder="" class="form-control">
+                                        <input ng-model="noticeForm.reason" type="input" id="reason" placeholder="" class="form-control">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="regions">Regions Affected</label> 
-                                        <input type="input" id="regions" placeholder="" class="form-control">
+                                        <input ng-model="noticeForm.regions" type="input" id="regions" placeholder="" class="form-control">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="services">Services Affected</label> 
-                                        <textarea id="services" placeholder="" class="form-control"> </textarea>
+                                        <textarea ng-model="noticeForm.services" id="services" placeholder="" class="form-control"> </textarea>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="biz_impact">Business Impact</label> 
-                                        <textarea id="biz_impact" placeholder="" class="form-control"> </textarea>
+                                        <textarea ng-model="noticeForm.biz_impact" id="biz_impact" placeholder="" class="form-control"> </textarea>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="workaround">Workaround</label> 
-                                        <textarea id="workaround" placeholder="" class="form-control"> </textarea>
+                                        <textarea ng-model="noticeForm.workaround" id="workaround" placeholder="" class="form-control"> </textarea>
                                     </div>
+                                    <input type="hidden" ng-model="noticeForm.id">
 
 
                                     <p class="text-center">

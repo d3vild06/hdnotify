@@ -10,6 +10,7 @@ var mongoose = require('mongoose'),
 
 /**
  * Create a Notice
+ * POST method to /notices
  */
 exports.create = function(req, res) {
 	var notice = new Notice(req.body);
