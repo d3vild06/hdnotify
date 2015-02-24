@@ -1,3 +1,4 @@
+<section data-ng-controller="NoticesController">
 <div class="wrapper wrapper-content" data-ng-controller="NoticesController">
 <div class="row">
     <div class="col-lg-12 animated fadeIn">
@@ -38,19 +39,18 @@
 
 <div class="row">
     <div class="col-lg-12 animated fadeInUp">
-        <div class="ibox float-e-margins">
+        <!-- <div class="ibox float-e-margins"> -->
             <div class="ibox-title">
                 <h5>New Notice</h5>
-                <div ibox-tools></div>
             </div>
             <div class="ibox-content">
             <div class="row">
-                    <div class="col-sm-4 b-r">
-
+                    
                         <form role="form" data-ng-submit="create()" novalidate>
+                        <div class="col-sm-4 b-r">
                          <div class="form-group">
                          <label for="type">Select Affected Service</label>
-                            <select ng-model="noticeForm" ng-options="t.title for t in templates" class="form-control m-b" name="service">
+                            <select ng-model="noticeForm" ng-options="t.services for t in templates" class="form-control m-b" name="service">
                             <option value="">-- select a service --</option>
                             </select>
                         </div>
@@ -65,24 +65,33 @@
                          <div class="form-group">
                             <label class="font-normal">Outage Start Time</label>
 
-                            <div class="input-group date">
-                                <input type="datetime" class="form-control" id="start-time" date-time ng-model="start_time" view="hours">
-                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            <div class="dropdown">
+                                <a class="dropdown-toggle date-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="">
+                                    <div class="input-group"><input type="text" class="form-control" data-ng-model="data.date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                    <datetimepicker data-ng-model="data.date"
+                                                    data-datetimepicker-config="{ dropdownSelector: '.date-toggle' }"></datetimepicker>
+                                </ul>
                             </div>
                         </div>
+
                             <div class="form-group">
-                                <label>Ticket #</label> <input type="text" id="ticket" ng-model="ticket" placeholder="IMXXXX" class="form-control">
+                                <label>Ticket #</label> 
+                                <input type="text" id="ticket" ng-model="ticket" placeholder="IMXXXX" class="form-control">
                             </div>
                             <div class="form-group">
                                  <label for="type">Priority</label>
-                                    <select ng-model="priority" class="form-control m-b" name="priority">
+                                    <select ng-model="priority" class="form-control m-b" id="priority" name="priority">
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                  <label for="type">Auto-Update Interval (minutes)</label>
-                                    <select ng-model="update_time" class="form-control m-b" name="update">
+                                    <select ng-model="update_time" class="form-control m-b" id="update_time" name="update">
                                         <option value="60">60</option>
                                         <option value="30">30</option>
                                 </select>
@@ -97,10 +106,10 @@
                                         <input ng-model="noticeForm.title" type="input" id="title" placeholder="" class="form-control">
                                     </div>
 
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <label for="reason">ITSB Reason</label> 
                                         <input ng-model="noticeForm.reason" type="input" id="reason" placeholder="" class="form-control">
-                                    </div>
+                                    </div> -->
 
                                     <div class="form-group">
                                         <label for="regions">Regions Affected</label> 
@@ -126,16 +135,11 @@
 
                                     <p class="text-center">
                                         <div>
-                                        <button class="btn btn-sm btn-danger pull-right m-t-n-xs" type="submit"><strong>Submit</strong></button>
+                                        <button class="btn btn-sm btn-danger pull-right m-t-n-xs" type="submit" id=
+                                        "submit"><strong>Submit</strong></button>
                                         </div>
                                     </p>
-                    </div>
-                        </form>
-                    
-                 
+                                    </form>
+                        </div>
                 </div>
-            </div>
         </div>
-    </div>
-</div>
-</div>

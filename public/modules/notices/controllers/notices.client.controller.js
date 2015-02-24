@@ -9,10 +9,17 @@ angular.module('notices').controller('NoticesController', ['$scope', '$statePara
 		$scope.create = function() {
 			// Create new Notice object
 			var notice = new Notices ({
-				notice_type: this.noticeForm.type,
-				title: this.noticeForm.title
-
-
+				notice_type: this.type,
+				title: this.noticeForm.title,
+				status: 'active',
+				auto_update: this.update_time,
+				ticket_number: this.ticket,
+				priority: this.priority,
+				services_affected: this.noticeForm.services,
+				biz_impact: this.noticeForm.biz_impact,
+				outage_start_time: this.data.date,
+				regions_affected: this.noticeForm.regions,
+				workaround: this.noticeForm.workaround
 
 			});
 
@@ -21,7 +28,8 @@ angular.module('notices').controller('NoticesController', ['$scope', '$statePara
 				$location.path('notices/' + response._id);
 
 				// Clear form fields
-				$scope.name = '';
+				$scope.type = '';
+				$scope.noticeForm.title = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -97,7 +105,18 @@ angular.module('notices').controller('NoticesController', ['$scope', '$statePara
 			services: 'Single Sign On (SSO) services',
 			biz_impact: 'SSO to corporate applications via myHDS and portal.hds.com',
 			workaround: 'none'
+		},
+
+		{
+			id: 4,
+			title: 'mSupportPRO Application Issues',
+			reason: 'Uplanned Outage',
+			regions: 'Global',
+			services: 'Mobility',
+			biz_impact: 'Users are unable to access, create or view Service Requests via the mSupportPRO applicaton at this time',
+			workaround: 'none'
 		}
+
 		];
 
 	}

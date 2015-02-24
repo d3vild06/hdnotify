@@ -44,17 +44,23 @@ var NoticeSchema = new Schema({
         type: String,
         required: true
     },
-    brief_description: {
-        type: String,
-        required: true
-    },
+    // brief_description: {
+    //     type: String,
+    //     required: true
+    // },
     biz_impact: {
         type: String,
         required: true
     },
+     workaround: {
+        type: String,
+        required: true
+    },
+    // only for notice updates
     status_update: {
         type: String
     },
+    // required on resolution notice
     resolution: {
         type: String
     },
@@ -76,6 +82,10 @@ var NoticeSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
+    created_by: {
+        type: Schema.ObjectId,
+        ref: 'User'
+    },
     updated_at: {
         type: Date
     },

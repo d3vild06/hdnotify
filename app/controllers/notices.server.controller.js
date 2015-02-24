@@ -14,7 +14,7 @@ var mongoose = require('mongoose'),
  */
 exports.create = function(req, res) {
 	var notice = new Notice(req.body);
-	notice.user = req.user;
+	notice.created_by = req.user;
 
 	notice.save(function(err) {
 		if (err) {
