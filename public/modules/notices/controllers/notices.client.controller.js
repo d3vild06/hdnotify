@@ -25,7 +25,9 @@ angular.module('notices').controller('NoticesController', ['$scope', '$statePara
 
 			// Redirect after save
 			notice.$save(function(response) {
-				$location.path('notices/' + response._id);
+				// $location.path('notices/' + response._id);
+				//redirect to dashboard
+				$location.path('/');
 
 				// Clear form fields
 				$scope.type = '';

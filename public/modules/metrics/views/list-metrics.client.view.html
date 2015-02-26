@@ -1,0 +1,19 @@
+<section data-ng-controller="MetricsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Metrics</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="metric in metrics" data-ng-href="#!/metrics/{{metric._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="metric.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="metric.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="metric.name"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!metrics.$resolved || metrics.length">
+    	No Metrics yet, why don't you <a href="/#!/metrics/create">create one</a>?
+    </div>
+</section>
