@@ -83,7 +83,8 @@ var NoticeSchema = new Schema({
 		default: Date.now
 	},
     created_by: {
-        type: Schema.ObjectId,
+        // type: Schema.ObjectId,
+        type: String,
         ref: 'User'
     },
     updated_at: {

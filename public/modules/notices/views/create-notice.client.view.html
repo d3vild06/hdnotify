@@ -23,7 +23,7 @@
                                         <td>{{notice.priority}}</td>
                                         <td>{{notice.ticket_number}}</td>
                                         <td>{{notice.title}}</td>
-                                        <td>{{notice.services_impacted}}</td>
+                                        <td>{{notice.priority}}</td>
                                         <td><small class="label label-primary">{{notice.status}}</small></td>
                                         
                                     </tr>
@@ -58,7 +58,7 @@
                          <label for="type">Select Notice Type</label>
                             <select ng-model="type" class="form-control m-b" name="type">
                                 <option value="outage">Outage</option>
-                                <option value="info">Informational</option>
+                                <option value="informational">Informational</option>
                             </select>
                         </div>
                        
