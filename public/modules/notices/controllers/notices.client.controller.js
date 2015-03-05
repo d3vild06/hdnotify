@@ -117,6 +117,16 @@ angular.module('notices').controller('NoticesController', ['$scope', '$statePara
 			services: 'Mobility',
 			biz_impact: 'Users are unable to access, create or view Service Requests via the mSupportPRO applicaton at this time',
 			workaround: 'none'
+		},
+
+		{
+			id: 5,
+			title: 'theLoop Unavailable',
+			reason: 'Uplanned Outage',
+			regions: 'Global',
+			services: 'theLoop (Jive)',
+			biz_impact: 'Users are unable to login or create documents at this time',
+			workaround: 'none'
 		}
 
 		];

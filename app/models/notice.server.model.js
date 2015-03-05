@@ -85,7 +85,7 @@ var NoticeSchema = new Schema({
     created_by: {
         // type: Schema.ObjectId,
         type: String,
-        ref: 'User'
+        // ref: 'User'
     },
     updated_at: {
         type: Date

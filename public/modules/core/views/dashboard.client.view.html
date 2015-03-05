@@ -41,17 +41,19 @@
                 <table class="table table-hover table-bordered">
                     <thead>
                     <tr>
+                        <th>Outage Start Time</th>
                         <th>Priority</th>
                         <th>Ticket #</th>
                         <th>Title</th>
-                        <th>Services Impacted</th>
+                        <th>Services Affected</th>
                         <th>Status</th>
                         <th>Action</th>
                         
                     </tr>
                     </thead>
                     <tbody>
-                    <tr data-ng-repeat="notice in notices | filter: query">
+                    <tr data-ng-repeat="notice in notices | filter: query | orderBy: '-created'">
+                        <td>{{notice.outage_start_time | date: 'medium'}}</td>
                         <td>{{notice.priority}}</td>
                         <td>{{notice.ticket_number}}</td>
                         <td>{{notice.title}}</td>
