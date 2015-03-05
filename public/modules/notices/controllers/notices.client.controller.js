@@ -77,6 +77,13 @@ angular.module('notices').controller('NoticesController', ['$scope', '$statePara
 			});
 		};
 
+		// find latest notice
+		$scope.findLatest = function() {
+			$scope.notice = Notices.get({ 
+				sort: {created: -1}
+			});
+		};
+
 		// mockup notice template data
 		$scope.templates = [
 		{

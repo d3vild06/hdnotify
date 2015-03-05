@@ -1,5 +1,5 @@
 <section data-ng-controller="NoticesController">
-<div class="wrapper wrapper-content" data-ng-controller="NoticesController">
+<div class="wrapper wrapper-content" data-ng-controller="NoticesController" data-ng-init="findLatest()">
 <div class="row">
     <div class="col-lg-12 animated fadeIn">
        <div class="panel panel-danger">
@@ -15,16 +15,18 @@
                                         <th>Title</th>
                                         <th>Priority</th>
                                         <th>Status</th>
+                                        <th>Created By</th>
                                         
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr data-ng-repeat="notice in notices">
-                                        <td>{{notice.priority}}</td>
+                                    <tr>
+                                        <td>{{notice.created}}</td>
                                         <td>{{notice.ticket_number}}</td>
                                         <td>{{notice.title}}</td>
                                         <td>{{notice.priority}}</td>
                                         <td><small class="label label-primary">{{notice.status}}</small></td>
+                                        <td>{{notice.created_by}}</td>
                                         
                                     </tr>
                                     </tbody>

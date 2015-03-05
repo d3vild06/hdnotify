@@ -86,6 +86,21 @@ exports.list = function(req, res) {
 };
 
 /**
+ * return notice based on status
+ */
+exports.noticeByStatus = function(req, res) {
+	var status = req.params.status;
+	Notice.findOne({status: status}).sort({$natural:-1}).exec(function(err, notice) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(notice);
+		}
+	});
+};
+/**
  * Get count of notices (active or closed or total)
  */
 exports.getCount = function(req, res) {

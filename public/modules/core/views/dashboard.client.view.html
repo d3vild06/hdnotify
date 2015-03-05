@@ -52,7 +52,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr data-ng-repeat="notice in notices | filter: query | orderBy: '-created'">
+                    <tr data-ng-repeat="notice in notices | filter:{status:'active'} | filter: query | orderBy: '-created'">
                         <td>{{notice.outage_start_time | date: 'medium'}}</td>
                         <td>{{notice.priority}}</td>
                         <td>{{notice.ticket_number}}</td>

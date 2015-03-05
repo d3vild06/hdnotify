@@ -9,6 +9,11 @@ module.exports = function(app) {
 		.get(notices.list)
 		.post(users.requiresLogin, notices.create);
 
+	// get list of notice based on status
+	app.route('/notices/:status')
+		.get(notices.noticeByStatus);
+
+
 	app.route('/notices/:noticeId')
 		.get(notices.read)
 		.put(users.requiresLogin, notices.hasAuthorization, notices.update)
