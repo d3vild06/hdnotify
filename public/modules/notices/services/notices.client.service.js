@@ -7,6 +7,11 @@ angular.module('notices').factory('Notices', ['$resource',
 		}, {
 			update: {
 				method: 'PUT'
+			},
+			active: {
+				method: 'GET',
+				params: {state: 'active'},
+				url: 'notices/status/:state'
 			}
 		});
 	}

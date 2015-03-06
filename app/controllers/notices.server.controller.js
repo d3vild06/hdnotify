@@ -89,8 +89,8 @@ exports.list = function(req, res) {
  * return notice based on status
  */
 exports.noticeByStatus = function(req, res) {
-	var status = req.params.status;
-	Notice.findOne({status: status}).sort({$natural:-1}).exec(function(err, notice) {
+	var state = req.params.state;
+	Notice.findOne({status: state}).sort({$natural:-1}).exec(function(err, notice) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)

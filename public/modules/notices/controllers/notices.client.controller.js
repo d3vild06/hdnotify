@@ -68,6 +68,8 @@ angular.module('notices').controller('NoticesController', ['$scope', '$statePara
 		// Find a list of Notices
 		$scope.find = function() {
 			$scope.notices = Notices.query();
+			var status = res.status;
+			$scope.status = status;
 		};
 
 		// Find existing Notice
@@ -77,11 +79,9 @@ angular.module('notices').controller('NoticesController', ['$scope', '$statePara
 			});
 		};
 
-		// find latest notice
-		$scope.findLatest = function() {
-			$scope.notice = Notices.get({ 
-				sort: {created: -1}
-			});
+		// find latest notice based on state (active | closed)
+		$scope.findOneActive = function() {
+			$scope.notice = Notices.active();
 		};
 
 		// mockup notice template data

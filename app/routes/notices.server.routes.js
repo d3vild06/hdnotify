@@ -10,7 +10,7 @@ module.exports = function(app) {
 		.post(users.requiresLogin, notices.create);
 
 	// get list of notice based on status
-	app.route('/notices/:status')
+	app.route('/notices/status/:state')
 		.get(notices.noticeByStatus);
 
 
