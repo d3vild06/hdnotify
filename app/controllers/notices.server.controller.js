@@ -6,7 +6,8 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Notice = mongoose.model('Notice'),
-	_ = require('lodash');
+	_ = require('lodash'),
+	nodemailer = require('nodemailer');
 
 /**
  * Create a Notice
@@ -14,6 +15,7 @@ var mongoose = require('mongoose'),
  */
 exports.create = function(req, res) {
 	var notice = new Notice(req.body);
+	//capture the logged in username
 	notice.created_by = req.user.username;
 
 	notice.save(function(err) {
