@@ -34,11 +34,11 @@ module.exports = {
 	mailer: {
 		from: process.env.MAILER_FROM || 'HelpDeskNotifications@hds.com',
 		options: {
-			path: process.env.SENDMAIL_BIN || '/usr/sbin/sendmail',
-			args: [{
-				// an array of extra command line options to pass to the sendmail command (ie. ["-f", "foo@blurdybloop.com"]).
+			path: process.env.SENDMAIL_BIN || '/usr/sbin/sendmail'
+			// args: [{
+			// 	// an array of extra command line options to pass to the sendmail command (ie. ["-f", "foo@blurdybloop.com"]).
 
-			}]
+			// }]
 
 		}
 	}
