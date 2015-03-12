@@ -31,7 +31,7 @@ module.exports = {
 		callbackURL: '/auth/github/callback'
 	},
 	mailer: {
-		from: process.env.MAILER_FROM || 'Help Desk Notifications',
+		from: process.env.MAILER_FROM || 'HelpDeskNotifications@hds.com',
 		options: {
 			host: process.env.HOSTNAME || 'mail.hds.com',
 			auth: {

@@ -30,7 +30,7 @@ exports.create = function(req, res) {
 			var mailOptions = {
 				to: 'roberto.quezada@hds.com',
 				from: config.mailer.from,
-				subject: notice.title,
+				subject: "test notification",
 				html: '<h1>This is a test email</h1>'
 			};
 			smtpTransport.sendMail(mailOptions, function(err) {
