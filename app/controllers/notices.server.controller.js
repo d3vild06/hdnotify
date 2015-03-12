@@ -8,7 +8,8 @@ var mongoose = require('mongoose'),
 	Notice = mongoose.model('Notice'),
 	_ = require('lodash'),
 	config = require('../../config/config'),
-	nodemailer = require('nodemailer');
+	nodemailer = require('nodemailer'),
+	sendMail = require('nodemailer-sendmail-transport');
 
 /**
  * Create a Notice
@@ -26,14 +27,14 @@ exports.create = function(req, res) {
 			});
 		} else {
 			// if no error saving to DB, send email safely
-			var smtpTransport = nodemailer.createTransport(config.mailer.options);
+			var transporter = nodemailer.createTransport(sendMail(config.mailer.options));
 			var mailOptions = {
 				to: 'roberto.quezada@hds.com',
 				from: config.mailer.from,
 				subject: "test notification",
 				html: '<h1>This is a test email</h1>'
 			};
-			smtpTransport.sendMail(mailOptions, function(err) {
+			transporter.sendMail(mailOptions, function(err) {
 				if (!err) {
 					res.status(200).send({
 						message: 'Notice successfully saved and email notification sent out!'

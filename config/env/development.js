@@ -30,14 +30,16 @@ module.exports = {
 		clientSecret: process.env.GITHUB_SECRET || 'APP_SECRET',
 		callbackURL: '/auth/github/callback'
 	},
+	// using nodemailer sendmail npm plugin here
 	mailer: {
 		from: process.env.MAILER_FROM || 'HelpDeskNotifications@hds.com',
 		options: {
-			host: process.env.HOSTNAME || 'mail.hds.com',
-			auth: {
-				user: process.env.MAILER_USERNAME || 'MAILER_USERNAME',
-				pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
-			}
+			path: process.env.SENDMAIL_BIN || '/usr/sbin/sendmail',
+			args: [{
+				// an array of extra command line options to pass to the sendmail command (ie. ["-f", "foo@blurdybloop.com"]).
+
+			}]
+
 		}
 	}
 };
