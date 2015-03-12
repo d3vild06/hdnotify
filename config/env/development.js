@@ -33,8 +33,7 @@ module.exports = {
 	mailer: {
 		from: process.env.MAILER_FROM || 'Help Desk Notifications',
 		options: {
-			host: process.env.HOSTNAME || 'localhost',
-			port: 25,
+			host: process.env.HOSTNAME || 'mail.hds.com',
 			auth: {
 				user: process.env.MAILER_USERNAME || 'MAILER_USERNAME',
 				pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
