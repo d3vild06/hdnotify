@@ -36,8 +36,8 @@ module.exports = {
 			host: process.env.HOSTNAME || 'localhost',
 			port: 25,
 			auth: {
-				user: process.env.MAILER_USERNAME || 'roquezada',
-				pass: process.env.MAILER_PASSWORD || 'R3ds0x80!#'
+				user: process.env.MAILER_USERNAME || 'MAILER_USERNAME',
+				pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
 			}
 		}
 	}
