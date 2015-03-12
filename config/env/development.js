@@ -31,12 +31,13 @@ module.exports = {
 		callbackURL: '/auth/github/callback'
 	},
 	mailer: {
-		from: process.env.MAILER_FROM || 'help desk notifications',
+		from: process.env.MAILER_FROM || 'Help Desk Notifications',
 		options: {
-			service: process.env.MAILER_SERVICE_PROVIDER || 'MAILER_SERVICE_PROVIDER',
+			host: process.env.HOSTNAME || 'localhost',
+			port: 25,
 			auth: {
-				user: process.env.MAILER_EMAIL_ID || 'MAILER_EMAIL_ID',
-				pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
+				user: process.env.MAILER_USERNAME || 'roquezada',
+				pass: process.env.MAILER_PASSWORD || 'R3ds0x80!#'
 			}
 		}
 	}

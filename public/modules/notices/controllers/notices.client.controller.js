@@ -68,8 +68,6 @@ angular.module('notices').controller('NoticesController', ['$scope', '$statePara
 		// Find a list of Notices
 		$scope.find = function() {
 			$scope.notices = Notices.query();
-			var status = res.status;
-			$scope.status = status;
 		};
 
 		// Find existing Notice
