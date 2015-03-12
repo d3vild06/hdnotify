@@ -114,7 +114,7 @@ exports.list = function(req, res) {
  */
 exports.noticeByStatus = function(req, res) {
 	var state = req.params.state;
-	Notice.findOne({status: state}).sort({$natural:-1}).exec(function(err, notice) {
+	Notice.findOne({status: state}).sort({created:-1}).exec(function(err, notice) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
