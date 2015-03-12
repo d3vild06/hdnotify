@@ -31,8 +31,8 @@ exports.create = function(req, res) {
 			var mailOptions = {
 				to: 'roberto.quezada@hds.com',
 				from: config.mailer.from,
-				subject: req.title,
-				html: '<h1>req.biz_impact</h1> req.services_affected'
+				subject: req.body.title,
+				html: req.body.biz_impact
 			};
 			transporter.sendMail(mailOptions, function(err) {
 				if (!err) {
