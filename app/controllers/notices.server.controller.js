@@ -27,12 +27,20 @@ exports.create = function(req, res) {
 			});
 		} else {
 			// if no error saving to DB, send email safely
+			var html = res.render('templates/new-notice', {
+				title: req.body.title,
+				reason: req.body.notice_type,
+				regions: req.body.regions_affected,
+				outage_start_time: req.body.outage_start_time,
+				services: req.body.services_affected,
+				biz_impact: req.body.biz_impact
+			});
 			var transporter = nodemailer.createTransport(sendMail(config.mailer.options));
 			var mailOptions = {
 				to: 'roberto.quezada@hds.com',
 				from: config.mailer.from,
 				subject: req.body.title,
-				html: req.body.biz_impact
+				html: html
 			};
 			transporter.sendMail(mailOptions, function(err) {
 				if (!err) {
