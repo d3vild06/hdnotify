@@ -8,6 +8,9 @@ var mongoose = require('mongoose'),
 	Notice = mongoose.model('Notice'),
 	_ = require('lodash'),
 	config = require('../../config/config'),
+	path = require('path'),
+	templatesDir = path.resolve(__dirname, '../views', 'templates'),
+	emailTemplates = require('email-templates'),
 	nodemailer = require('nodemailer'),
 	sendMail = require('nodemailer-sendmail-transport');
 
@@ -27,20 +30,33 @@ exports.create = function(req, res) {
 			});
 		} else {
 			// if no error saving to DB, send email safely
-			var emailHtml = res.render('templates/new-notice', {
+			// we're using email-template here so gotta construct object
+			emailTemplates(templatesDir, function(err, template) {
+
+				  if (err) {
+				    console.log(err);
+				  } else {
+
+
+			var emailHtml = {
 				title: req.body.title,
 				reason: req.body.notice_type,
 				regions: req.body.regions_affected,
 				outage_start_time: req.body.outage_start_time,
 				services: req.body.services_affected,
 				biz_impact: req.body.biz_impact
-			});
+			};
+			template('new-notice', emailHtml, function(err, html, text) {
+			      if (err) {
+			        console.log(err);
+			      } else {
+
 			var transporter = nodemailer.createTransport(sendMail(config.mailer.options));
 			var mailOptions = {
 				to: 'roberto.quezada@hds.com',
 				from: config.mailer.from,
-				subject: req.body.title,
-				html: emailHtml
+				subject: req.body.title,	
+				html: html
 			};
 			transporter.sendMail(mailOptions, function(err) {
 				if (!err) {
@@ -50,15 +66,19 @@ exports.create = function(req, res) {
 				} else {
 					return res.status(500).send({
 						message: errorHandler.getErrorMessage(err)
-					});
-				}
-
-			});
-
-			// res.jsonp(notice);
-		}
-	});
+						});
+						}
+						});
+					}
+				});
+			}
+		});
+	}
+});
 };
+
+
+
 
 /**
  * Show the current Notice
