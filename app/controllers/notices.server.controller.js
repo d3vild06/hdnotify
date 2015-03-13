@@ -27,7 +27,7 @@ exports.create = function(req, res) {
 			});
 		} else {
 			// if no error saving to DB, send email safely
-			var emailHtml = res.render('templates/new-notice.html', {
+			var emailHtml = res.render('templates/new-notice', {
 				title: req.body.title,
 				reason: req.body.notice_type,
 				regions: req.body.regions_affected,
