@@ -6,7 +6,7 @@
 	<h1>IT Service Outage Bulleting</h1>
 
 	<p>Title: {{title}}</p>
-	<p>ITSB Reason: {{Reason}}</p>
+	<p>ITSB Reason: {{reason}}</p>
 	<p>Regions affected: {{regions}}</p>
 	<p>Outage Start Time: {{outage_start_time}}</p>
 	<br>
