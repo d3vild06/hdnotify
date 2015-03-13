@@ -27,7 +27,7 @@ exports.create = function(req, res) {
 			});
 		} else {
 			// if no error saving to DB, send email safely
-			var html = res.render('templates/new-notice', {
+			var emailHtml = res.render('templates/new-notice', {
 				title: req.body.title,
 				reason: req.body.notice_type,
 				regions: req.body.regions_affected,
@@ -40,7 +40,7 @@ exports.create = function(req, res) {
 				to: 'roberto.quezada@hds.com',
 				from: config.mailer.from,
 				subject: req.body.title,
-				html: html
+				html: emailHtml
 			};
 			transporter.sendMail(mailOptions, function(err) {
 				if (!err) {
