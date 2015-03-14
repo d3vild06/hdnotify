@@ -8,7 +8,7 @@
 	<p>Title: {{title}}</p>
 	<p>ITSB Reason: {{reason}}</p>
 	<p>Regions affected: {{regions}}</p>
-	<p>Outage Start Time: {{outage_start_time}}</p>
+	<p>Outage Start Time: {{outage_start_time | date: 'medium'}}</p>
 	<br>
 	<br>
 	<p>Services affected: {{services}}</p>
