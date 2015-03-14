@@ -13,6 +13,15 @@ module.exports = function(app) {
 	app.route('/notices/status/:state')
 		.get(notices.noticeByStatus);
 
+	// get list of notice templates
+	app.route('/notices/templates')
+		.get(notices.listTemplates);
+	// 	.post(notices.createTemplate);
+
+	// app.route('notices/templates/:templateId')
+	// 	.get(notices.readTemplate)
+	// 	.put(notices.updateTemplate);
+
 
 	app.route('/notices/:noticeId')
 		.get(notices.read)

@@ -2,7 +2,7 @@
 
 // Notices controller
 angular.module('notices').controller('NoticesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Notices',
-	function($scope, $stateParams, $location, Authentication, Notices) {
+	function($scope, $stateParams, $location, Authentication, Notices, Templates) {
 		$scope.authentication = Authentication;
 
 		// Create new Notice
@@ -82,59 +82,9 @@ angular.module('notices').controller('NoticesController', ['$scope', '$statePara
 			$scope.notice = Notices.active();
 		};
 
-		// mockup notice template data
-		$scope.templates = [
-		{
-			id: 1,
-			title: 'myHDS.com Unavailable',
-			reason: 'Uplanned Outage',
-			regions: 'Global',
-			services: 'myHDS.hds.com',
-			biz_impact: 'SSO to corporate applications via myHDS',
-			workaround: 'none'
-		},
+		// get template info
+		$scope.templates = Notices.getTemplates();
 
-		{
-			id: 2,
-			title: 'portal.hds.com Unavailable',
-			reason: 'Uplanned Outage',
-			regions: 'APAC',
-			services: 'Access to portal.hds.com',
-			biz_impact: 'Access to various applications for partners and customers such as PQM',
-			workaround: 'none'
-		},
-
-		{
-			id: 3,
-			title: 'Identity Access Management',
-			reason: 'Uplanned Outage',
-			regions: 'Global',
-			services: 'Single Sign On (SSO) services',
-			biz_impact: 'SSO to corporate applications via myHDS and portal.hds.com',
-			workaround: 'none'
-		},
-
-		{
-			id: 4,
-			title: 'mSupportPRO Application Issues',
-			reason: 'Uplanned Outage',
-			regions: 'Global',
-			services: 'Mobility',
-			biz_impact: 'Users are unable to access, create or view Service Requests via the mSupportPRO applicaton at this time',
-			workaround: 'none'
-		},
-
-		{
-			id: 5,
-			title: 'theLoop Unavailable',
-			reason: 'Uplanned Outage',
-			regions: 'Global',
-			services: 'theLoop (Jive)',
-			biz_impact: 'Users are unable to login or create documents at this time',
-			workaround: 'none'
-		}
-
-		];
 
 	}
 

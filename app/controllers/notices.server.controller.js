@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Notice = mongoose.model('Notice'),
+	Template = mongoose.model('Template'),
 	_ = require('lodash'),
 	config = require('../../config/config'),
 	path = require('path'),
@@ -34,7 +35,9 @@ exports.create = function(req, res) {
 			emailTemplates(templatesDir, function(err, template) {
 
 				  if (err) {
-				    console.log(err);
+				    return res.status(500).send({
+			        	message: errorHandler.getErrorMessage(err)
+			        });
 				  } else {
 
 
@@ -48,7 +51,9 @@ exports.create = function(req, res) {
 			};
 			template('new-notice', emailHtml, function(err, html, text) {
 			      if (err) {
-			        console.log(err);
+			        return res.status(500).send({
+			        	message: errorHandler.getErrorMessage(err)
+			        });
 			      } else {
 
 			var transporter = nodemailer.createTransport(sendMail(config.mailer.options));
@@ -137,6 +142,19 @@ exports.list = function(req, res) {
 		}
 	});
 };
+
+exports.listTemplates = function(req, res) {
+	Template.find(function(err, templates) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(templates);
+		}
+	});
+};
+
 
 /**
  * return notice based on status
