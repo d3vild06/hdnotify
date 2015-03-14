@@ -15,10 +15,10 @@ angular.module('notices').controller('NoticesController', ['$scope', '$statePara
 				auto_update: this.update_time,
 				ticket_number: this.ticket,
 				priority: this.priority,
-				services_affected: this.noticeForm.services,
+				services_affected: this.noticeForm.services_affected,
 				biz_impact: this.noticeForm.biz_impact,
 				outage_start_time: this.data.date,
-				regions_affected: this.noticeForm.regions,
+				regions_affected: this.noticeForm.regions_affected,
 				workaround: this.noticeForm.workaround
 
 			});
