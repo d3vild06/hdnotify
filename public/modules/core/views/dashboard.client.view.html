@@ -8,14 +8,12 @@
             </div>
             <div class="ibox-content">
 
-                <p>
-                    <strong>0</strong> notices have been opened in the last 24 hours. To update any active notice, you can select it from the dashboard below. To create a new notice, click on the link to the left to start a new outage notice.
+                <p data-ng-show="authentication.user">
+                    <strong>0</strong> notices have been opened in the last 24 hours. To update or create a new notice, you can choose an action from the navigation on the left-hand side or below via the dashboard. 
                      </p>
 
-                <p>
-                    <small>
-                        
-                    </small>
+                <p data-ng-hide="authentication.user">
+                    <strong>0</strong> notices have been opened in the last 24 hours. <strong>Please login in </strong>order to access the options to create or update a notice.
                 </p>
             </div>
         </div>
