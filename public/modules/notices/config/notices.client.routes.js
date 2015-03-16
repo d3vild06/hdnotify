@@ -17,9 +17,9 @@ angular.module('notices').config(['$stateProvider',
 			url: '/notices/:noticeId',
 			templateUrl: 'modules/notices/views/view-notice.client.view.html'
 		}).
-		state('editNotice', {
-			url: '/notices/:noticeId/edit',
-			templateUrl: 'modules/notices/views/edit-notice.client.view.html'
+		state('updateNotice', {
+			url: '/notices/:noticeId/update',
+			templateUrl: 'modules/notices/views/update-notice.client.view.html'
 		});
 	}
 ]);

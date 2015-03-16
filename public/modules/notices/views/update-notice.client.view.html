@@ -1,10 +1,10 @@
 <section data-ng-controller="NoticesController">
-<div class="wrapper wrapper-content" data-ng-init="findOneActive()">
+<div class="wrapper wrapper-content">
 <div class="row">
     <div class="col-lg-12 animated fadeIn">
        <div class="panel panel-danger">
                             <div class="panel-heading">
-                                Latest Notice Created
+                                Notice Information
                             </div>
                             <div class="panel-body">
                                <table class="table table-hover table-bordered">
@@ -15,7 +15,8 @@
                                         <th>Title</th>
                                         <th>Priority</th>
                                         <th>Status</th>
-                                        <th>Created By</th>
+                                        <th>Opened By</th>
+                                        <th>Updated By</th>
                                         
                                     </tr>
                                     </thead>
@@ -27,13 +28,14 @@
                                         <td>{{notice.priority}}</td>
                                         <td><small class="label label-primary">{{notice.status}}</small></td>
                                         <td>{{notice.created_by}}</td>
+                                        <td>{{notice.updated_by}}</td>
                                         
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
                             <div class="panel-footer">
-                                <small>Updated at: </small>
+                                <small>Updated at: {{notice.updated_at}}</small>
                             </div>
                         </div>
     </div>
