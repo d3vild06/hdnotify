@@ -1,21 +1,56 @@
 <section data-ng-controller="NoticesController" data-ng-init="findOne()">
 	<div class="page-header">
-		<h1 data-ng-bind="notice.name"></h1>
+		<h1 data-ng-bind="notice.title"></h1>
 	</div>
-	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == notice.user._id))">
-		<a class="btn btn-primary" href="/#!/notices/{{notice._id}}/edit">
-			<i class="glyphicon glyphicon-edit"></i>
-		</a>
-		<a class="btn btn-primary" data-ng-click="remove();">
-			<i class="glyphicon glyphicon-trash"></i>
-		</a>
-	</div>
-	<small>
-		<em class="text-muted">
-			Posted on
-			<span data-ng-bind="notice.created | date:'mediumDate'"></span>
-			by
-			<span data-ng-bind="notice.user.displayName"></span>
-		</em>
-	</small>
+	<div class="row">
+    <div class="col-lg-12 animated fadeIn">
+       <div class="panel panel-danger">
+                            <div class="panel-heading">
+                                Notice Information
+                            </div>
+                            <div class="panel-body">
+                               <table class="table table-hover table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>Outage Start Time</th>
+                                        <th>Ticket #</th>
+                                        <th>Title</th>
+                                        <th>Priority</th>
+                                        <th>Status</th>
+                                        <th>Opened By</th>
+                                        <th>Updated By</th>
+                                        <th>Action</th>
+                                        
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>{{notice.outage_start_time | date: 'medium'}}</td>
+                                        <td><a target="_blank" ng-href="http://helpdesk.hds.com/sm/index.do?ctx=docEngine&file=probsummary&query=number=%22{{notice.ticket_number}}%22">{{notice.ticket_number}}</a></td>
+                                        <td>{{notice.title}}</td>
+                                        <td>{{notice.priority}}</td>
+                                        <td><small class="label label-primary">{{notice.status}}</small></td>
+                                        <td>{{notice.created_by}}</td>
+                                        <td>{{notice.updated_by}}</td>
+                                        <td>
+                                        <a class="btn btn-primary" href="/#!/notices/{{notice._id}}/update">
+											<i class="glyphicon glyphicon-edit"></i>
+										</a>
+										<!-- <a class="btn btn-primary" data-ng-click="remove();">
+											<i class="glyphicon glyphicon-trash"></i>
+										</a> -->
+										</td>
+                                        
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="panel-footer">
+                                <small>Updated at: {{notice.updated_at | date: 'medium'}}</small>
+                            </div>
+                        </div>
+
+                        
+    </div>
+</div>
 </section>

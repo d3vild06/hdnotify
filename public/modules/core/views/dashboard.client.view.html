@@ -8,13 +8,20 @@
             </div>
             <div class="ibox-content">
 
+            <div class="p-xs">
+                <div class="pull-left m-r-md">
+                    <i class="fa fa-globe mid-icon"></i>
+                </div>
                 <p data-ng-show="authentication.user">
-                    <strong>0</strong> notices have been opened in the last 24 hours. To update or create a new notice, you can choose an action from the navigation on the left-hand side or below via the dashboard. 
+                    <strong>0</strong> notices have been opened in the last 24 hours. To update or create a new notice, you can choose an action from the navigation on the left-hand side or below via the dashboard. Please note, you are only allowed to update an "active" notice.
                      </p>
 
                 <p data-ng-hide="authentication.user">
                     <strong>0</strong> notices have been opened in the last 24 hours. <strong>Please login in </strong>order to access the options to create or update a notice.
                 </p>
+            </div>
+
+                
             </div>
         </div>
     </div>
@@ -31,33 +38,40 @@
                 </div>
                 </div>
             </div>
-                <table class="table table-hover table-bordered">
-                    <thead>
-                    <tr>
-                        <th>Outage Start Time</th>
-                        <th>Priority</th>
-                        <th>Ticket #</th>
-                        <th>Title</th>
-                        <th>Services Affected</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                        
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <!-- if you want to filter based on status add: filter:{status:'active'} -->
-                    <tr data-ng-repeat="notice in notices | filter: query | orderBy: '-created'">
-                        <td>{{notice.outage_start_time | date: 'medium'}}</td>
-                        <td>{{notice.priority}}</td>
-                        <td>{{notice.ticket_number}}</td>
-                        <td>{{notice.title}}</td>
-                        <td>{{notice.services_affected}}</td>
-                        <td><small class="label label-primary">{{notice.status}}</small></td>
-                        <td><a ng-href="/{{notice._id}}/update"><small class="label label-danger">update</small></td></a>
-                        
-                    </tr>
-                    </tbody>
-                </table>
+        <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                <th>Outage Start Time</th>
+                <th>Priority</th>
+                <th>Ticket #</th>
+                <th>Title</th>
+                <th>Services Affected</th>
+                <th>Status</th>
+                <th data-ng-show="authentication.user">Action</th>
+                
+            </tr>
+            </thead>
+            <tbody>
+            <!-- if you want to filter based on status add: filter:{status:'active'} -->
+            <tr data-ng-repeat="notice in notices | filter: query | orderBy: '-created'" ng-switch on="notice.status == 'active'">
+                <td>{{notice.outage_start_time | date: 'medium'}}</td>
+                <td style="width:30px">{{notice.priority}}</td>
+                <td>{{notice.ticket_number}}</td>
+                <td>{{notice.title}}</td>
+                <td>{{notice.services_affected}}</td>
+                <td align="center" ng-switch-when="true">
+                <small class="label label-primary">{{notice.status}}</small>
+                </td>
+                <td align="center" ng-switch-default>
+                <small class="label label-default">{{notice.status}}</small>
+                </td>
+                <td align="center" ng-switch-when="true">
+                <a href="/#!/notices/{{notice._id}}/update"><button class="btn btn-xs btn-danger"><span class="fa fa-arrow-circle-o-up"> update </button></td></a>
+                <td align="center" ng-switch-default>
+                <a href="/#!/notices/{{notice._id}}"><button class="btn btn-xs btn-info"><span class="fa fa-eye"></button></td></a>
+            </tr>
+            </tbody>
+            </table>
 
             </div>
         </div>

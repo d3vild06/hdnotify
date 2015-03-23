@@ -25,6 +25,9 @@ var TemplateSchema = new Schema({
 	workaround: {
 		type: String
 	},
+	email_dlist: {
+		type: String
+	},
 	created: {
 		type: Date,
 		default: Date.now

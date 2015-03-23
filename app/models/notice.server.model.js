@@ -56,6 +56,10 @@ var NoticeSchema = new Schema({
         type: String,
         required: true
     },
+    email_dlist: {
+        type: String,
+        required: true
+    },
     // only for notice updates
     status_update: {
         type: String
@@ -73,7 +77,7 @@ var NoticeSchema = new Schema({
         required: true
     },
     outage_end_time: {
-        typ: Date
+        type: Date
     },
     outage_total_time: {
         type: Number
@@ -88,11 +92,11 @@ var NoticeSchema = new Schema({
         // ref: 'User'
     },
     updated_at: {
-        type: Date
+        type: Date,
+        default: Date.now
     },
 	updated_by: {
-		type: Schema.ObjectId,
-		ref: 'User'
+		type: String
 	}
 });
 

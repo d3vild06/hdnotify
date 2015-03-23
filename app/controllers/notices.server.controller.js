@@ -41,15 +41,16 @@ exports.create = function(req, res) {
 				  } else {
 
 
-			var emailHtml = {
+			var emailHtmlnew = {
 				title: req.body.title,
 				reason: req.body.notice_type,
 				regions: req.body.regions_affected,
 				outage_start_time: req.body.outage_start_time,
 				services: req.body.services_affected,
-				biz_impact: req.body.biz_impact
+				biz_impact: req.body.biz_impact,
+				ticket_number: req.body.ticket_number
 			};
-			template('new-notice', emailHtml, function(err, html, text) {
+			template('new-notice', emailHtmlnew, function(err, html, text) {
 			      if (err) {
 			        return res.status(500).send({
 			        	message: errorHandler.getErrorMessage(err)
@@ -58,9 +59,9 @@ exports.create = function(req, res) {
 
 			var transporter = nodemailer.createTransport(sendMail(config.mailer.options));
 			var mailOptions = {
-				to: 'roberto.quezada@hds.com',
+				to: req.body.email_dlist,
 				from: config.mailer.from,
-				subject: req.body.title,	
+				subject: 'IT Service Bulletin - ' + req.body.title + ' - ' +req.body.regions_affected + ' - Unplanned Outage (New)',	
 				html: html
 			};
 			transporter.sendMail(mailOptions, function(err) {
@@ -96,9 +97,12 @@ exports.read = function(req, res) {
  * Update a Notice
  */
 exports.update = function(req, res) {
-	var notice = req.notice ;
-
+	var notice = req.notice;
+	notice.updated_by = req.user.username;
+	notice.status = req.body.update_type;
 	notice = _.extend(notice , req.body);
+
+	
 
 	notice.save(function(err) {
 		if (err) {
@@ -106,8 +110,89 @@ exports.update = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(notice);
-		}
+
+			var status_string, emailHtmlUpdate, emailTemplate;
+
+			// if no error saving to DB, send email safely
+			// we're using email-template here so gotta construct object
+			emailTemplates(templatesDir, function(err, template) {
+
+				  if (err) {
+				    return res.status(500).send({
+			        	message: errorHandler.getErrorMessage(err)
+			        });
+				  } else {
+
+			// update email
+			var emailHtml1 = {
+				title: req.body.title,
+				reason: req.body.notice_type,
+				regions: req.body.regions_affected,
+				outage_start_time: req.body.outage_start_time,
+				services: req.body.services_affected,
+				biz_impact: req.body.biz_impact,
+				status_update: req.body.status_update,
+				ticket_number: req.body.ticket_number
+			};
+
+			// resolution email
+			var emailHtml2 = {
+				title: req.body.title,
+				reason: req.body.notice_type,
+				regions: req.body.regions_affected,
+				outage_start_time: req.body.outage_start_time,
+				outage_end_time: req.body.outage_end_time,
+				services: req.body.services_affected,
+				biz_impact: req.body.biz_impact,
+				status_update: req.body.status_update,
+				ticket_number: req.body.ticket_number
+			};
+
+			// set notice content based on type
+			// set default to update
+			
+
+			if (req.body.status === 'closed') {
+				status_string = 'Resolved';
+				emailHtmlUpdate = emailHtml2;
+				emailTemplate = 'resolution-notice';
+			} else {
+				status_string = 'Update';
+				emailHtmlUpdate = emailHtml1;
+				emailTemplate = 'update-notice';
+			}
+
+			template(emailTemplate, emailHtmlUpdate, function(err, html, text) {
+			      if (err) {
+			        return res.status(500).send({
+			        	message: errorHandler.getErrorMessage(err)
+			        });
+			      } else {
+
+			
+			var transporter = nodemailer.createTransport(sendMail(config.mailer.options));
+			var mailOptions = {
+				to: req.body.email_dlist,
+				from: config.mailer.from,
+				subject: 'IT Service Bulletin - ' + req.body.title + ' - ' +req.body.regions_affected + ' - Unplanned Outage ('+status_string+')', 	
+				html: html
+			};
+			transporter.sendMail(mailOptions, function(err) {
+				if (!err) {
+					res.status(200).send({
+						message: 'Notice successfully saved and email notification sent out!'
+					});
+				} else {
+					return res.status(500).send({
+						message: errorHandler.getErrorMessage(err)
+						});
+						}
+						});
+					}
+				});
+			}
+		});
+	  }
 	});
 };
 
@@ -202,3 +287,8 @@ exports.hasAuthorization = function(req, res, next) {
 	}
 	next();
 };
+
+
+
+
+
