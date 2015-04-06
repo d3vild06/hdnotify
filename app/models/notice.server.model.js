@@ -3,7 +3,8 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
+var timestamps = require('mongoose-timestamp'),
+    mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
 /**
@@ -52,7 +53,7 @@ var NoticeSchema = new Schema({
         type: String,
         required: true
     },
-     workaround: {
+    workaround: {
         type: String,
         required: true
     },
@@ -82,22 +83,25 @@ var NoticeSchema = new Schema({
     outage_total_time: {
         type: Number
     },
-	created: {
-		type: Date,
-		default: Date.now
-	},
     created_by: {
-        // type: Schema.ObjectId,
         type: String,
-        // ref: 'User'
-    },
-    updated_at: {
-        type: Date,
-        default: Date.now
+        ref: 'User'
     },
 	updated_by: {
 		type: String
-	}
+	},
+    updates: [{
+            number: {type: String},
+            reason: {type: String},
+            updated_at: {type: Date, default: Date.now}
+        }]
+
+});
+
+// mongoose plugin to auto-generate the createdAt and updatedAt property fields for this model
+NoticeSchema.plugin(timestamps, {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
 });
 
 mongoose.model('Notice', NoticeSchema);

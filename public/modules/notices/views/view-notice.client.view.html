@@ -1,56 +1,119 @@
 <section data-ng-controller="NoticesController" data-ng-init="findOne()">
-	<div class="page-header">
+<div class="wrapper wrapper-content">
+<!-- 	<div class="page-header">
 		<h1 data-ng-bind="notice.title"></h1>
-	</div>
+	</div> -->
 	<div class="row">
     <div class="col-lg-12 animated fadeIn">
        <div class="panel panel-danger">
-                            <div class="panel-heading">
-                                Notice Information
-                            </div>
-                            <div class="panel-body">
-                               <table class="table table-hover table-bordered">
-                                    <thead>
-                                    <tr>
-                                        <th>Outage Start Time</th>
-                                        <th>Ticket #</th>
-                                        <th>Title</th>
-                                        <th>Priority</th>
-                                        <th>Status</th>
-                                        <th>Opened By</th>
-                                        <th>Updated By</th>
-                                        <th>Action</th>
-                                        
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>{{notice.outage_start_time | date: 'medium'}}</td>
-                                        <td><a target="_blank" ng-href="http://helpdesk.hds.com/sm/index.do?ctx=docEngine&file=probsummary&query=number=%22{{notice.ticket_number}}%22">{{notice.ticket_number}}</a></td>
-                                        <td>{{notice.title}}</td>
-                                        <td>{{notice.priority}}</td>
-                                        <td><small class="label label-primary">{{notice.status}}</small></td>
-                                        <td>{{notice.created_by}}</td>
-                                        <td>{{notice.updated_by}}</td>
-                                        <td>
-                                        <a class="btn btn-primary" href="/#!/notices/{{notice._id}}/update">
-											<i class="glyphicon glyphicon-edit"></i>
-										</a>
-										<!-- <a class="btn btn-primary" data-ng-click="remove();">
-											<i class="glyphicon glyphicon-trash"></i>
-										</a> -->
-										</td>
-                                        
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="panel-footer">
-                                <small>Updated at: {{notice.updated_at | date: 'medium'}}</small>
-                            </div>
-                        </div>
+            <div class="panel-heading">
+                Notice Information
+            </div>
+            <div class="panel-body">
+               <table class="table table-hover table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Ticket #</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Opened By</th>
+                        <th>Updated By</th>
+                        <th>Action</th>
+                        
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{notice.title}}</td>
+                        <td><a target="_blank" ng-href="http://helpdesk.hds.com/sm/index.do?ctx=docEngine&file=probsummary&query=number=%22{{notice.ticket_number}}%22">{{notice.ticket_number}}</a></td>
+                        <td>{{notice.priority}}</td>
+                        <td><small class="label label-primary">{{notice.status}}</small></td>
+                        <td>{{notice.created_by.username}}</td>
+                        <td>{{notice.updated_by}}</td>
+                        <td ng-show="notice.status == 'active' && authentication.user">
+                        <a href="/#!/notices/{{notice._id}}/update"><button class="btn btn-xs btn-danger"><small class="fa fa-arrow-circle-o-up"> update </button></a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- <div class="panel-footer">
+                <small>Updated at: {{notice.updated_at | date: 'medium'}}</small>
+            </div> -->
+        </div>
 
                         
     </div>
+</div>
+
+<div class="row">
+<div class="col-lg-12 animated fadeIn">
+<div class="ibox-content" id="ibox-content">
+
+                    <div id="vertical-timeline" class="vertical-container dark-timeline center-orientation">
+                        <div class="vertical-timeline-block">
+                            <div class="vertical-timeline-icon red-bg">
+                                <i class="fa fa-envelope"></i>
+                            </div>
+
+                            <div class="vertical-timeline-content">
+                                <h2>Notice created ({{notice.created_at | date: 'shortTime'}})</h2>
+                                <p>Email notification (ITSB) was successfully sent</p>
+                                <span class="btn btn-sm btn-primary">View Notice</span>
+                                    <span class="vertical-date">
+                                        {{notice.created_at | date: 'EEEE'}} <br/>
+                                        <small>{{notice.created_at | date: 'MMMM dd'}}</small>
+                                    </span>
+                            </div>
+                        </div>
+
+                        <div ng-repeat="update in notice.updates" class="vertical-timeline-block" ng-show="notice.updated_at">
+                            <div class="vertical-timeline-icon blue-bg">
+                                <i class="fa fa-file-text"></i>
+                            </div>
+
+                            <div class="vertical-timeline-content">
+                                <h2>Update Sent ({{update.updated_at | date: 'shortTime'}})</h2>
+                                <p>Update {{update.number}} was sent</p>
+                                
+                                    <span class="vertical-date">
+                                        {{update.updated_at | date: 'EEEE'}}<br/>
+                                        <small>{{update.updated_at | date: 'MMMM dd'}}</small>
+                                    </span>
+                            </div>
+                        </div>
+
+                     <!--    <div class="vertical-timeline-block">
+                            <div class="vertical-timeline-icon lazur-bg">
+                                <i class="fa fa-coffee"></i>
+                            </div>
+
+                            <div class="vertical-timeline-content">
+                                <h2>Coffee Break</h2>
+                                <p>White Mocha please!</p>
+                               
+                                <span class="vertical-date"> Yesterday <br/><small>Dec 23</small></span>
+                            </div>
+                        </div>
+ -->
+                      <!--   <div class="vertical-timeline-block">
+                            <div class="vertical-timeline-icon yellow-bg">
+                                <i class="fa fa-phone"></i>
+                            </div>
+
+                            <div class="vertical-timeline-content">
+                                <h2>Phone with Jeronimo</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, optio, dolorum provident rerum aut hic quasi placeat iure tempora laudantium ipsa ad debitis unde? Iste voluptatibus minus veritatis qui ut.</p>
+                                <span class="vertical-date">Yesterday <br/><small>Dec 23</small></span>
+                            </div>
+                        </div> -->
+
+                    </div>
+
+                </div>
+
+</div>
+</div>
+
 </div>
 </section>

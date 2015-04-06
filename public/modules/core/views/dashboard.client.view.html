@@ -4,28 +4,20 @@
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <h5>Welcome <span data-ng-bind="authentication.user.displayName"></span></h5>
-                <div ibox-tools></div>
             </div>
-            <div class="ibox-content">
-
+            <div class="ibox-content m-b-sm border-bottom">
             <div class="p-xs">
                 <div class="pull-left m-r-md">
                     <i class="fa fa-globe mid-icon"></i>
                 </div>
-                <p data-ng-show="authentication.user">
-                    <strong>0</strong> notices have been opened in the last 24 hours. To update or create a new notice, you can choose an action from the navigation on the left-hand side or below via the dashboard. Please note, you are only allowed to update an "active" notice.
-                     </p>
-
-                <p data-ng-hide="authentication.user">
-                    <strong>0</strong> notices have been opened in the last 24 hours. <strong>Please login in </strong>order to access the options to create or update a notice.
-                </p>
-            </div>
-
-                
+                <h2 style="color: red;">HDNotify</h2>
+                <span>To create or update a notice, please ensure you are first logged in to access the action option. Note, you are only allowed to update an 'active' notice.</span>
             </div>
         </div>
     </div>
 </div>
+</div>
+
 <div class="row">
   <div class="col-lg-12">
         <div class="ibox float-e-margins">
@@ -53,7 +45,7 @@
             </thead>
             <tbody>
             <!-- if you want to filter based on status add: filter:{status:'active'} -->
-            <tr data-ng-repeat="notice in notices | filter: query | orderBy: '-created'" ng-switch on="notice.status == 'active'">
+            <tr data-ng-repeat="notice in notices | filter: query | orderBy: '-updated_at'" ng-switch on="notice.status == 'active'">
                 <td>{{notice.outage_start_time | date: 'medium'}}</td>
                 <td style="width:30px">{{notice.priority}}</td>
                 <td>{{notice.ticket_number}}</td>
@@ -61,21 +53,22 @@
                 <td>{{notice.services_affected}}</td>
                 <td align="center" ng-switch-when="true">
                 <small class="label label-primary">{{notice.status}}</small>
+                <a ng-hide="authentication.user" href="/#!/notices/{{notice._id}}"><small class="label label-info"><i class="fa fa-eye"></i></small></a>
                 </td>
                 <td align="center" ng-switch-default>
                 <small class="label label-default">{{notice.status}}</small>
+                <a ng-hide="authentication.user" href="/#!/notices/{{notice._id}}"><small class="label label-info"><i class="fa fa-eye"></i></small></a>
                 </td>
-                <td align="center" ng-switch-when="true">
-                <a href="/#!/notices/{{notice._id}}/update"><button class="btn btn-xs btn-danger"><span class="fa fa-arrow-circle-o-up"> update </button></td></a>
-                <td align="center" ng-switch-default>
-                <a href="/#!/notices/{{notice._id}}"><button class="btn btn-xs btn-info"><span class="fa fa-eye"></button></td></a>
+                <td align="center" ng-switch-when="true" ng-show="authentication.user">
+                <a href="/#!/notices/{{notice._id}}/update"><small class="label label-danger"><i class="fa fa-arrow-circle-o-up"> update</i></small></a>
+                </td>
+                <td align="center" ng-switch-default ng-show="authentication.user">
+                <a href="/#!/notices/{{notice._id}}"><small class="label label-info"><i class="fa fa-eye"></i></small></a></td>
             </tr>
             </tbody>
             </table>
-
-            </div>
         </div>
     </div>
 </div>
-
+    </div>
 </div>

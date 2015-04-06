@@ -50,7 +50,7 @@ module.exports = {
 	},
 	// using nodemailer sendmail npm plugin here
 	mailer: {
-		from: process.env.MAILER_FROM || 'HelpDeskNotifications@hds.com',
+		from: process.env.MAILER_FROM || 'IT Communications <ITCommunications2@hds.com>',
 		options: {
 			path: process.env.SENDMAIL_BIN || '/usr/sbin/sendmail'
 

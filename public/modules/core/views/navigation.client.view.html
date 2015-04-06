@@ -24,7 +24,7 @@
                 </div>
             </li>
             <li ng-class="{active: $uiRoute}" ui-route="/" >
-                <a href="/#!/home"><i class="fa fa-home"></i> <span class="nav-label">Dashboard</span></a>
+                <a href="/#!/"><i class="fa fa-home"></i> <span class="nav-label">Dashboard</span></a>
             </li>
             <li data-ng-repeat="item in menu.items | orderBy: 'position'" data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.menuItemType" ui-route="{{item.uiRoute}}" ng-class="{active: ($uiRoute)}">
                 <a href="/#!{{item.uiRoute}}"><i class="fa {{item.iconClass}}"></i> <span class="nav-label">{{item.title}} </span> <!-- <span ng-show="item.items" class="fa arrow"></span> --></a>

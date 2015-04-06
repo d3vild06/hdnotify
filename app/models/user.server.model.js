@@ -75,6 +75,10 @@ var UserSchema = new Schema({
 		}],
 		default: ['user']
 	},
+	notices: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Notice'
+	}],
 	updated: {
 		type: Date
 	},
