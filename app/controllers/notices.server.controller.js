@@ -24,7 +24,7 @@ exports.create = function(req, res) {
 	//capture the logged in username
 	//notice.created_by = req.user.username;
 	notice.created_by = req.user._id;
-	// notice.updates.push({number: '1', reason: 'update', updated_at: new Date().now});
+
 
 	notice.save(function(err) {
 		if (err) {
@@ -102,14 +102,13 @@ exports.read = function(req, res) {
 exports.update = function(req, res) {
 	var notice = req.notice;
 	var reason;
-	// var now = new Date().now;
-	// notice.updated_at = now;
 	notice.updated_by = req.user.username;
 	var count = notice.updates.length;
 	// console.log('old updates array count is: ' + count);
 	notice = _.extend(notice , req.body);
 	// capture update number for subsequent email updates
 	var new_count = ++count;
+
 
 	if (req.body.status === 'closed') {
 		reason = 'resolution';
@@ -118,7 +117,6 @@ exports.update = function(req, res) {
 	}
 
 	notice.updates.push({number: new_count, reason: reason});
-	
 
 	notice.save(function(err, notice) {
 		if (err) {
