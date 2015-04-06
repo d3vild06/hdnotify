@@ -11,12 +11,17 @@ angular.module('notices').factory('Notices', ['$resource',
 			active: {
 				method: 'GET',
 				params: {state: 'active'},
-				url: 'notices/status/:state'
+				url: 'notices/status/:state',
 			},
 			getTemplates: {
 				method: 'GET',
 				url: 'notices/templates/:templateId',
 				isArray: true
+			},
+			getEnv: {
+				method: 'GET',
+				url: 'server/environment',
+				isArray: false
 			}
 		});
 	}

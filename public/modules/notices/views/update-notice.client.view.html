@@ -1,4 +1,4 @@
-<section data-ng-controller="NoticesController">
+<section data-ng-controller="NoticesController" data-ng-init="findOne()">
 <div class="wrapper wrapper-content">
 <div class="row">
     <div class="col-lg-12 animated fadeIn">
@@ -10,7 +10,7 @@
                                <table class="table table-hover table-bordered">
                                     <thead>
                                     <tr>
-                                        <th>Date Created</th>
+                                        <th>Outage Start Time</th>
                                         <th>Ticket #</th>
                                         <th>Title</th>
                                         <th>Priority</th>
@@ -22,12 +22,12 @@
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td>{{notice.created | date: 'medium'}}</td>
+                                        <td>{{notice.outage_start_time | date: 'medium'}}</td>
                                         <td>{{notice.ticket_number}}</td>
                                         <td>{{notice.title}}</td>
                                         <td>{{notice.priority}}</td>
                                         <td><small class="label label-primary">{{notice.status}}</small></td>
-                                        <td>{{notice.created_by}}</td>
+                                        <td>{{notice.created_by.username}}</td>
                                         <td>{{notice.updated_by}}</td>
                                         
                                     </tr>
@@ -35,7 +35,7 @@
                                 </table>
                             </div>
                             <div class="panel-footer">
-                                <small>Updated at: {{notice.updated_at}}</small>
+                                <small>Updated at: {{notice.updated_at | date: 'medium'}}</small>
                             </div>
                         </div>
     </div>
@@ -45,55 +45,46 @@
     <div class="col-lg-12 animated fadeInUp">
         <!-- <div class="ibox float-e-margins"> -->
             <div class="ibox-title">
-                <h5>New Notice</h5>
+                <h5>Update Notice</h5>
             </div>
             <div class="ibox-content">
             <div class="row">
                     
-                        <form role="form" data-ng-submit="create()" novalidate>
+                        <form name="updateForm" role="form" data-ng-submit="update()" novalidate>
                         <div class="col-sm-4 b-r">
-                         <div class="form-group">
-                         <label for="type">Select Affected Service</label>
-                            <select ng-model="noticeForm" ng-options="t.services_affected for t in templates" class="form-control m-b" name="service">
-                            <option value="">-- select a service --</option>
-                            </select>
-                        </div>
-                         <div class="form-group">
-                         <label for="type">Select Notice Type</label>
-                            <select ng-model="type" class="form-control m-b" name="type">
-                                <option value="outage">Outage</option>
-                                <option value="informational">Informational</option>
+                            <div class="form-group">
+                         <label for="type">Select Update Type</label>
+                        <select ng-model="notice.status" class="form-control m-b" name="type" data-ng-change="updateCheck()">
+                                <option value="active">Update</option>
+                                <option value="closed">Resolution</option>
                             </select>
                         </div>
                        
-                         <div class="form-group">
-                            <label class="font-normal">Outage Start Time</label>
+                         <div class="form-group" data-ng-show="check">
+                            <label class="font-normal">Outage End Time</label>
 
                             <div class="dropdown">
                                 <a class="dropdown-toggle date-toggle" id="dLabel" role="button" data-toggle="dropdown" data-disabled="true" data-target="#" href="">
-                                    <div class="input-group"><input type="text" class="form-control" data-ng-model="data.date">
+                                    <div class="input-group">
+                                    <input type="text" class="form-control" data-ng-model="notice.outage_end_time">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                    <datetimepicker data-ng-model="data.date"
+                                    <datetimepicker data-ng-model="notice.outage_end_time"
                                                     data-datetimepicker-config="{ dropdownSelector: '.date-toggle' }"></datetimepicker>
                                 </ul>
                             </div>
                         </div>
 
                             <div class="form-group">
-                                <label>Ticket #</label> 
-                                <input type="text" id="ticket" ng-model="ticket" placeholder="IMXXXX" class="form-control">
-                            </div>
-                            <div class="form-group">
                                  <label for="type">Priority</label>
-                                    <select ng-model="priority" class="form-control m-b" id="priority" name="priority">
+                                    <select ng-model="notice.priority" class="form-control m-b" id="priority" name="priority">
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                 </select>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" data-ng-hide="check">
                                  <label for="type">Auto-Update Interval (minutes)</label>
                                     <select ng-model="update_time" class="form-control m-b" id="update_time" name="update">
                                         <option value="60">60</option>
@@ -103,11 +94,11 @@
 
                             
                             </div>
-                            <!-- right side of the form - where data is autopopulated based on the affected service selected -->
+                            <!-- right side of the form - where data is autopopulated based on the noticed selected -->
                                <div class="col-sm-8">
                                     <div class="form-group">
                                         <label for="title">Title</label> 
-                                        <input ng-model="noticeForm.title" type="input" id="title" placeholder="" class="form-control">
+                                        <input data-ng-model="notice.title" type="input" id="title" placeholder="" class="form-control">
                                     </div>
 
                                     <!-- <div class="form-group">
@@ -117,30 +108,42 @@
 
                                     <div class="form-group">
                                         <label for="regions">Regions Affected</label> 
-                                        <input ng-model="noticeForm.regions_affected" type="input" id="regions" placeholder="" class="form-control">
+                                        <input data-ng-model="notice.regions_affected" type="input" id="regions_affected" placeholder="" class="form-control" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="services">Services Affected</label> 
-                                        <textarea ng-model="noticeForm.services_affected" id="services" placeholder="" class="form-control"> </textarea>
+                                        <textarea data-ng-model="notice.services_affected" id="services" placeholder="" class="form-control" required> </textarea>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="biz_impact">Business Impact</label> 
-                                        <textarea ng-model="noticeForm.biz_impact" id="biz_impact" placeholder="" class="form-control"> </textarea>
+                                        <textarea data-ng-model="notice.biz_impact" id="biz_impact" placeholder="" class="form-control" required> </textarea>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="workaround">Workaround</label> 
-                                        <textarea ng-model="noticeForm.workaround" id="workaround" placeholder="" class="form-control"> </textarea>
+                                        <textarea data-ng-model="notice.workaround" id="workaround" placeholder="" class="form-control" required> </textarea>
                                     </div>
-                                    <input type="hidden" ng-model="noticeForm.id">
+
+                                    <div class="form-group">
+                                        <label for="status_update">Status Update</label> 
+                                        <textarea data-ng-model="notice.status_update" id="workaround" placeholder="" class="form-control" required> </textarea>
+                                    </div>
+
+                                    <div class="form-group" ng-show="server.env == 'development'">
+                                        <label for="email_dlist">Email To Distribution</label> 
+                                        <input ng-model="notice.email_dlist" id="email_dlist" placeholder="" class="form-control" required>
+                                    </div>
+
+                                    <input type="hidden" data-ng-model="notice.ticket_number" id="ticket_number">
+                                   
 
 
                                     <p class="text-center">
                                         <div>
                                         <button class="btn btn-sm btn-danger pull-right m-t-n-xs" type="submit" id=
-                                        "submit"><strong>Submit</strong></button>
+                                        "submit" ng-disabled="updateForm.$invalid"><strong>Submit</strong></button>
                                         </div>
                                     </p>
                                     <div data-ng-show="error" class="text-danger">

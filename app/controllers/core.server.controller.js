@@ -9,3 +9,8 @@ exports.index = function(req, res) {
 		request: req
 	});
 };
+
+exports.getEnv = function(req, res) {
+	var enviroment = process.env.NODE_ENV;
+	res.jsonp({env: enviroment});
+};

@@ -19,7 +19,7 @@ angular.module('core')
     .directive('minimalizaSidebar', function ($timeout) {
         return {
             restrict: 'A',
-            template: '<a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="" ng-click="minimalize()"><i class="fa fa-bars"></i></a>',
+            template: '<a class="navbar-minimalize minimalize-styl-2 btn btn-danger" href="" ng-click="minimalize()"><i class="fa fa-bars"></i></a>',
             controller: function ($scope, $element) {
                 $scope.minimalize = function () {
                     angular.element('body').toggleClass('mini-navbar');

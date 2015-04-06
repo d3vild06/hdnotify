@@ -22,7 +22,9 @@ var mongoose = require('mongoose'),
 exports.create = function(req, res) {
 	var notice = new Notice(req.body);
 	//capture the logged in username
-	notice.created_by = req.user.username;
+	//notice.created_by = req.user.username;
+	notice.created_by = req.user._id;
+	// notice.updates.push({number: '1', reason: 'update', updated_at: new Date().now});
 
 	notice.save(function(err) {
 		if (err) {
@@ -41,15 +43,17 @@ exports.create = function(req, res) {
 				  } else {
 
 
-			var emailHtml = {
+			var emailHtmlnew = {
 				title: req.body.title,
 				reason: req.body.notice_type,
 				regions: req.body.regions_affected,
 				outage_start_time: req.body.outage_start_time,
 				services: req.body.services_affected,
-				biz_impact: req.body.biz_impact
+				biz_impact: req.body.biz_impact,
+				ticket_number: req.body.ticket_number,
+				workaround: req.body.workaround
 			};
-			template('new-notice', emailHtml, function(err, html, text) {
+			template('new-notice', emailHtmlnew, function(err, html, text) {
 			      if (err) {
 			        return res.status(500).send({
 			        	message: errorHandler.getErrorMessage(err)
@@ -58,9 +62,9 @@ exports.create = function(req, res) {
 
 			var transporter = nodemailer.createTransport(sendMail(config.mailer.options));
 			var mailOptions = {
-				to: 'roberto.quezada@hds.com',
+				to: req.body.email_dlist,
 				from: config.mailer.from,
-				subject: req.body.title,	
+				subject: 'IT Service Bulletin - ' + req.body.title + ' - ' +req.body.regions_affected + ' - Unplanned Outage (New)',	
 				html: html
 			};
 			transporter.sendMail(mailOptions, function(err) {
@@ -96,18 +100,115 @@ exports.read = function(req, res) {
  * Update a Notice
  */
 exports.update = function(req, res) {
-	var notice = req.notice ;
-
+	var notice = req.notice;
+	var reason;
+	// var now = new Date().now;
+	// notice.updated_at = now;
+	notice.updated_by = req.user.username;
+	var count = notice.updates.length;
+	// console.log('old updates array count is: ' + count);
 	notice = _.extend(notice , req.body);
+	// capture update number for subsequent email updates
+	var new_count = ++count;
 
-	notice.save(function(err) {
+	if (req.body.status === 'closed') {
+		reason = 'resolution';
+	} else {
+		reason = 'update';
+	}
+
+	notice.updates.push({number: new_count, reason: reason});
+	
+
+	notice.save(function(err, notice) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(notice);
-		}
+			// console.log('new updates array count is: ' + count);
+			var status_string, emailHtmlUpdate, emailTemplate;
+
+			// if no error saving to DB, send email safely
+			// we're using email-template here so gotta construct object
+			emailTemplates(templatesDir, function(err, template) {
+
+				  if (err) {
+				    return res.status(500).send({
+			        	message: errorHandler.getErrorMessage(err)
+			        });
+				  } else {
+
+			// update email
+			var emailHtml1 = {
+				title: req.body.title,
+				reason: req.body.notice_type,
+				regions: req.body.regions_affected,
+				outage_start_time: req.body.outage_start_time,
+				services: req.body.services_affected,
+				biz_impact: req.body.biz_impact,
+				status_update: req.body.status_update,
+				ticket_number: req.body.ticket_number
+			};
+
+			// resolution email
+			var emailHtml2 = {
+				title: req.body.title,
+				reason: req.body.notice_type,
+				regions: req.body.regions_affected,
+				outage_start_time: req.body.outage_start_time,
+				outage_end_time: req.body.outage_end_time,
+				services: req.body.services_affected,
+				biz_impact: req.body.biz_impact,
+				status_update: req.body.status_update,
+				ticket_number: req.body.ticket_number
+			};
+
+			// set notice content based on type
+			// set default to update
+			
+
+			if (req.body.status === 'closed') {
+				status_string = 'Resolved';
+				emailHtmlUpdate = emailHtml2;
+				emailTemplate = 'resolution-notice';
+			} else {
+				status_string = 'Update';
+				emailHtmlUpdate = emailHtml1;
+				emailTemplate = 'update-notice';
+			}
+
+			template(emailTemplate, emailHtmlUpdate, function(err, html, text) {
+			      if (err) {
+			        return res.status(500).send({
+			        	message: errorHandler.getErrorMessage(err)
+			        });
+			      } else {
+
+			
+			var transporter = nodemailer.createTransport(sendMail(config.mailer.options));
+			var mailOptions = {
+				to: req.body.email_dlist,
+				from: config.mailer.from,
+				subject: 'IT Service Bulletin - ' + req.body.title + ' - ' +req.body.regions_affected + ' - Unplanned Outage ('+status_string+')', 	
+				html: html
+			};
+			transporter.sendMail(mailOptions, function(err) {
+				if (!err) {
+					res.status(200).send({
+						message: 'Notice successfully saved and email notification sent out!'
+					});
+				} else {
+					return res.status(500).send({
+						message: errorHandler.getErrorMessage(err)
+						});
+						}
+						});
+					}
+				});
+			}
+		});
+	  }
 	});
 };
 
@@ -185,7 +286,8 @@ exports.getCount = function(req, res) {
  * Notice middleware
  */
 exports.noticeByID = function(req, res, next, id) {
-	Notice.findById(id).populate('user', 'displayName').exec(function(err, notice) {
+	Notice.findById(id).populate('created_by', 'username').exec(function(err, notice) {
+		// console.log(JSON.stringify(notice, null, '\t'));
 		if (err) return next(err);
 		if (! notice) return next(new Error('Failed to load Notice ' + id));
 		req.notice = notice ;
@@ -202,3 +304,8 @@ exports.hasAuthorization = function(req, res, next) {
 	}
 	next();
 };
+
+
+
+
+

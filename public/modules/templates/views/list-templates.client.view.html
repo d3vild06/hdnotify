@@ -1,0 +1,19 @@
+<section data-ng-controller="TemplatesController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Templates</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="template in templates" data-ng-href="#!/templates/{{template._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="template.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="template.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="template.name"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!templates.$resolved || templates.length">
+    	No Templates yet, why don't you <a href="/#!/templates/create">create one</a>?
+    </div>
+</section>

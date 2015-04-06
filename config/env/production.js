@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/startapp',
+	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR) || 'localhost' + '/hdnotify',
 	assets: {
 		lib: {
 			css: [
@@ -48,14 +48,12 @@ module.exports = {
 		clientSecret: process.env.GITHUB_SECRET || 'APP_SECRET',
 		callbackURL: '/auth/github/callback'
 	},
+	// using nodemailer sendmail npm plugin here
 	mailer: {
-		from: process.env.MAILER_FROM || 'MAILER_FROM',
+		from: process.env.MAILER_FROM || 'IT Communications <ITCommunications2@hds.com>',
 		options: {
-			service: process.env.MAILER_SERVICE_PROVIDER || 'MAILER_SERVICE_PROVIDER',
-			auth: {
-				user: process.env.MAILER_EMAIL_ID || 'MAILER_EMAIL_ID',
-				pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
-			}
+			path: process.env.SENDMAIL_BIN || '/usr/sbin/sendmail'
+
 		}
 	}
 };

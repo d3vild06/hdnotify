@@ -7,7 +7,7 @@ angular.module('notices').config(['$stateProvider',
 		$stateProvider.
 		state('listNotices', {
 			url: '/notices',
-			templateUrl: 'modules/notices/views/list-notices.client.view.html'
+			templateUrl: 'modules/core/views/dashboard.client.view.html'
 		}).
 		state('createNotice', {
 			url: '/notices/create',

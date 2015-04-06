@@ -21,7 +21,8 @@ var fs = require('fs'),
 	flash = require('connect-flash'),
 	config = require('./config'),
 	consolidate = require('consolidate'),
-	path = require('path');
+	path = require('path'),
+	swig = require('swig');
 
 module.exports = function(db) {
 	// Initialize express app
@@ -63,6 +64,9 @@ module.exports = function(db) {
 	// Set views path and view engine
 	app.set('view engine', 'server.view.html');
 	app.set('views', './app/views');
+
+	// Set default UTC Timezone offset for swig templating (GMT -7 for Pacifict Time)
+	swig.setDefaultTZOffset(420);
 
 	// Environment dependent middleware
 	if (process.env.NODE_ENV === 'development') {

@@ -5,6 +5,7 @@ angular.module('notices').controller('NoticesController', ['$scope', '$statePara
 	function($scope, $stateParams, $location, Authentication, Notices, Templates) {
 		$scope.authentication = Authentication;
 
+
 		// Create new Notice
 		$scope.create = function() {
 			// Create new Notice object
@@ -17,9 +18,10 @@ angular.module('notices').controller('NoticesController', ['$scope', '$statePara
 				priority: this.priority,
 				services_affected: this.noticeForm.services_affected,
 				biz_impact: this.noticeForm.biz_impact,
-				outage_start_time: this.data.date,
+				outage_start_time: this.outage_start_time,
 				regions_affected: this.noticeForm.regions_affected,
-				workaround: this.noticeForm.workaround
+				workaround: this.noticeForm.workaround,
+				email_dlist: this.noticeForm.email_dlist
 
 			});
 
@@ -29,9 +31,7 @@ angular.module('notices').controller('NoticesController', ['$scope', '$statePara
 				//redirect to dashboard
 				$location.path('/');
 
-				// Clear form fields
-				$scope.type = '';
-				$scope.noticeForm.title = '';
+
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -54,12 +54,25 @@ angular.module('notices').controller('NoticesController', ['$scope', '$statePara
 			}
 		};
 
+		// checker function to show additional drop down fields based on update type (update/resolution)
+		//default to false
+		this.check = false;
+
+		$scope.updateCheck = function() {
+			var update_type = this.notice.status;
+
+			if (update_type === 'closed') {
+				this.check = true;
+			} else {
+				this.check = false;
+			}
+		};
 		// Update existing Notice
 		$scope.update = function() {
 			var notice = $scope.notice;
 
 			notice.$update(function() {
-				$location.path('notices/' + notice._id);
+				$location.path('/');
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -74,7 +87,7 @@ angular.module('notices').controller('NoticesController', ['$scope', '$statePara
 		$scope.findOne = function() {
 			$scope.notice = Notices.get({ 
 				noticeId: $stateParams.noticeId
-			});
+			});		
 		};
 
 		// find latest notice based on state (active | closed)
@@ -84,6 +97,14 @@ angular.module('notices').controller('NoticesController', ['$scope', '$statePara
 
 		// get template info
 		$scope.templates = Notices.getTemplates();
+
+		/**
+		* Get node server environment variables
+		* this will help set debug options
+		*/
+		
+		$scope.server = Notices.getEnv();
+
 
 
 	}
