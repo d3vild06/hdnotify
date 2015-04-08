@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('core').controller('HeaderController', ['$scope', 'Authentication', 'Menus',
-	function($scope, Authentication, Menus) {
+angular.module('core').controller('HeaderController', ['$scope', 'Authentication', 'Menus', 'Notices',
+	function($scope, Authentication, Menus, Notices) {
 		$scope.authentication = Authentication;
 		$scope.isCollapsed = false;
 		$scope.menu = Menus.getMenu('topbar');
@@ -14,5 +14,7 @@ angular.module('core').controller('HeaderController', ['$scope', 'Authentication
 		$scope.$on('$stateChangeSuccess', function() {
 			$scope.isCollapsed = false;
 		});
+
+		$scope.server = Notices.getEnv();
 	}
 ]);

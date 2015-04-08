@@ -4,8 +4,10 @@ module.exports = {
 	app: {
 		title: 'HDNotify - Notification Center',
 		description: 'Web Notification Tool',
-		keywords: 'MongoDB, Express, AngularJS, Node.js, Web'
+		keywords: 'MongoDB, Express, AngularJS, Node.js, Web',
+		
 	},
+	version: '0.0.1',
 	port: process.env.PORT || 3000,
 	templateEngine: 'swig',
 	sessionSecret: 'Th3Mach1n3!#',

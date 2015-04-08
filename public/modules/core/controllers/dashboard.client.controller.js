@@ -11,5 +11,6 @@ angular.module('core').controller('DashboardController', ['$scope', '$stateParam
 			$scope.notices = Notices.query();
 		};
 
+
 	}
 ]);

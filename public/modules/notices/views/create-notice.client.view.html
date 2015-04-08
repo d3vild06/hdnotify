@@ -1,5 +1,5 @@
-<section data-ng-controller="NoticesController as NoticeCtrl">
-<div class="wrapper wrapper-content" data-ng-init="findOneActive()">
+<section data-ng-controller="NoticesController">
+<div class="wrapper wrapper-content" data-ng-init="findLatest()">
 <div class="row">
     <div class="col-lg-12 animated fadeIn">
        <div class="panel panel-danger">
@@ -21,7 +21,7 @@
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td>{{notice.created | date: 'medium'}}</td>
+                                        <td>{{notice.created_at | date: 'medium'}}</td>
                                         <td><a target="_blank" ng-href="http://helpdesk.hds.com/sm/index.do?ctx=docEngine&file=probsummary&query=number=%22{{notice.ticket_number}}%22">{{notice.ticket_number}}</a></td>
                                         <td>{{notice.title}}</td>
                                         <td>{{notice.priority}}</td>
@@ -134,7 +134,7 @@
                                         <textarea ng-model="noticeForm.workaround" id="workaround" placeholder="" class="form-control" required> </textarea>
                                     </div>
   
-                                    <div class="form-group" ng-show="server.env == 'development'">
+                                    <div class="form-group">
                                         <label for="workaround">Email Distribution List</label> 
                                         <input ng-model="noticeForm.email_dlist" id="email_dlist" placeholder="" class="form-control" required>
                                     </div>
@@ -155,4 +155,5 @@
                         </div>
                 </div>
         </div>
+    </div>
 </section>

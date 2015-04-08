@@ -9,9 +9,9 @@ module.exports = function(app) {
 		.get(notices.list)
 		.post(users.requiresLogin, notices.create);
 
-	// get list of notice based on status
-	app.route('/notices/status/:state')
-		.get(notices.noticeByStatus);
+	// get latest notice
+	app.route('/notices/status/latest')
+		.get(notices.getLatestNotice);
 
 	// get list of notice templates
 	app.route('/notices/templates')

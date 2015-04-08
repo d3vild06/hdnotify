@@ -3,6 +3,9 @@
 /**
  * Module dependencies.
  */
+
+var config = require('../../config/config');
+
 exports.index = function(req, res) {
 	res.render('index', {
 		user: req.user || null,
@@ -12,5 +15,6 @@ exports.index = function(req, res) {
 
 exports.getEnv = function(req, res) {
 	var enviroment = process.env.NODE_ENV;
-	res.jsonp({env: enviroment});
+	var version = config.version;
+	res.jsonp({env: enviroment, app_ver: version});
 };

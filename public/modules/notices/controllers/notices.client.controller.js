@@ -91,8 +91,8 @@ angular.module('notices').controller('NoticesController', ['$scope', '$statePara
 		};
 
 		// find latest notice based on state (active | closed)
-		$scope.findOneActive = function() {
-			$scope.notice = Notices.active();
+		$scope.findLatest= function() {
+			$scope.notice = Notices.getLatest();
 		};
 
 		// get template info

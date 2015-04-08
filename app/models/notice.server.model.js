@@ -12,7 +12,7 @@ var timestamps = require('mongoose-timestamp'),
  */
 var NoticeSchema = new Schema({
 	template_id: {
-		type: String,
+		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Template'
 	},
     notice_type: {

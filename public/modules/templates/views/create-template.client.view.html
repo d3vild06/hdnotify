@@ -1,23 +1,84 @@
 <section data-ng-controller="TemplatesController">
-    <div class="page-header">
-        <h1>New Template</h1>
+<div class="wrapper wrapper-content animated fadeInDown">
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content m-b-sm border-bottom">
+            <div class="p-xs">
+                <div class="pull-left m-r-md">
+                    <i class="fa fa-envelope-square mid-icon"></i>
+                </div>
+                <h2 style="color: red;">HDNotify</h2>
+                <span>Create a new email template for any application unplanned outage. Note, please ensure one has not already been created for the same application.</span>
+            </div>
+        </div>
     </div>
-    <div class="col-md-12">
-        <form class="form-horizontal" data-ng-submit="create()" novalidate>
-            <fieldset>
-                <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required>
+</div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+            <div class="ibox-title">
+                <h5>New Template</h5>
+            </div>
+            <div class="ibox-content">
+                <form class="form-horizontal" name="createForm" role="form" data-ng-submit="create()" novalidate>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="title">Title</label> 
+                         <div class="col-sm-10">
+                        <input ng-model="title" type="input" id="title" placeholder="" class="form-control" required>
+                        </div>
                     </div>
+
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="regions">Regions Affected</label> 
+                         <div class="col-sm-10">
+                        <input ng-model="regions_affected" type="input" id="regions" placeholder="" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="services">Services Affected</label> 
+                         <div class="col-sm-10">
+                        <textarea ng-model="services_affected" id="services" placeholder="" class="form-control" required> </textarea>
+                        </div>
+                    </div>
+
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="biz_impact">Business Impact</label> 
+                         <div class="col-sm-10">
+                        <textarea ng-model="biz_impact" id="biz_impact" placeholder="" class="form-control" required> </textarea>
+                        </div>
+                    </div>
+
+
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="workaround">Email Distribution List</label> 
+                         <div class="col-sm-10">
+                        <input ng-model="email_dlist" id="email_dlist" placeholder="comma separated (AMER.all, APAC.all)" class="form-control" required>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-10">
+                        <button class="btn btn-sm btn-danger m-t-n-xs" type="submit" id=
+                        "submit" ng-disabled="createForm.$invalid"><strong>Create</strong></button>
+                        </div>
+                    </div>
+
+                    <div data-ng-show="error" class="text-danger">
+                        <strong data-ng-bind="error"></strong>
+                    </div>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <input type="submit" class="btn btn-default">
-                </div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
-            </fieldset>
-        </form>
+        </div>
     </div>
+</div>
 </section>

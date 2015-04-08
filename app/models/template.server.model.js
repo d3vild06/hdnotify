@@ -12,25 +12,27 @@ var timestamps = require('mongoose-timestamp'),
  */
 var TemplateSchema = new Schema({
 	title: {
-		type: String
+		type: String,
+		required: true
 	},
 	regions_affected: {
-		type: String
+		type: String,
+		required: true
 	},
 	services_affected: {
-		type: String
+		type: String,
+		required: true
 	},
 	biz_impact: {
-		type: String
-	},
-	workaround: {
-		type: String
+		type: String,
+		required: true
 	},
 	email_dlist: {
-		type: String
+		type: String,
+		required: true
 	},
 	notices_created: [{
-		type: mongoose.Schema.Types.ObjectId,
+		type: String,
 		ref: 'Notice'
 	}],
 	created_by: {

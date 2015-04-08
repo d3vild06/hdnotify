@@ -8,10 +8,10 @@ angular.module('notices').factory('Notices', ['$resource',
 			update: {
 				method: 'PUT'
 			},
-			active: {
+			getLatest: {
 				method: 'GET',
-				params: {state: 'active'},
-				url: 'notices/status/:state',
+				url: 'notices/status/latest',
+				isArray: false
 			},
 			getTemplates: {
 				method: 'GET',

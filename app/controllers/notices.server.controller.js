@@ -270,6 +270,23 @@ exports.noticeByStatus = function(req, res) {
 		}
 	});
 };
+
+/**
+ * return latest created notice 
+ */
+exports.getLatestNotice = function(req, res) {
+	Notice.findOne().limit(1).sort({created_at: -1}).populate('created_by', 'username').exec(function(err, notice) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(notice);
+		}
+	});
+};
+
+
 /**
  * Get count of notices (active or closed or total)
  */

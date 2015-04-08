@@ -9,7 +9,12 @@ angular.module('templates').controller('TemplatesController', ['$scope', '$state
 		$scope.create = function() {
 			// Create new Template object
 			var template = new Templates ({
-				name: this.name
+				title: this.title,
+				regions_affected: this.regions_affected,
+				services_affected: this.services_affected,
+				biz_impact: this.biz_impact,
+				email_dlist: this.email_dlist
+
 			});
 
 			// Redirect after save

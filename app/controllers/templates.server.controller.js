@@ -13,7 +13,7 @@ var mongoose = require('mongoose'),
  */
 exports.create = function(req, res) {
 	var template = new Template(req.body);
-	template.user = req.user;
+	template.created_by = req.user._id;
 
 	template.save(function(err) {
 		if (err) {
