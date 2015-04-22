@@ -4,7 +4,8 @@
  * Module dependencies.
  */
 var _ = require('lodash'),
-	glob = require('glob');
+	glob = require('glob'),
+	dotenv = require('dotenv').load();
 
 /**
  * Load app configurations

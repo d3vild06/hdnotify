@@ -3,8 +3,14 @@
 module.exports = {
 	db: 'mongodb://localhost/hdnotify-dev',
 	app: {
-		title: 'HDNotify - DEV Notification Center'
+		title: process.env.APP_TITLE || 'test'
 	},
+	ldap: {
+		server: process.env.LDAP_SERVER || '',
+		adminuser: process.env.LDAP_ADMINUSER || '',
+		adminpass: process.env.LDAP_ADMINPASS || ''
+	},
+	
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || 'APP_ID',
 		clientSecret: process.env.FACEBOOK_SECRET || 'APP_SECRET',
@@ -32,7 +38,7 @@ module.exports = {
 	},
 	// using nodemailer sendmail npm plugin here
 	mailer: {
-		from: process.env.MAILER_FROM || 'IT Communications <ITCommunications2@hds.com>',
+		from: process.env.MAILER_FROM,
 		options: {
 			path: process.env.SENDMAIL_BIN || '/usr/sbin/sendmail'
 

@@ -34,3 +34,4 @@ exports = module.exports = app;
 
 // Logging initialization
 console.log('HDNotify application started on port ' + config.port);
+console.log(process.env);

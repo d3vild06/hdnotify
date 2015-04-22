@@ -88,7 +88,7 @@ exports.list = function(req, res) {
  * Template middleware
  */
 exports.templateByID = function(req, res, next, id) { 
-	Template.findById(id).populate('user', 'displayName').exec(function(err, template) {
+	Template.findById(id).populate('created_by', 'displayName').exec(function(err, template) {
 		if (err) return next(err);
 		if (! template) return next(new Error('Failed to load Template ' + id));
 		req.template = template ;

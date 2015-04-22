@@ -1,21 +1,77 @@
-<section data-ng-controller="TemplatesController" data-ng-init="findOne()">
-	<div class="page-header">
-		<h1 data-ng-bind="template.name"></h1>
-	</div>
-	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == template.user._id))">
-		<a class="btn btn-primary" href="/#!/templates/{{template._id}}/edit">
-			<i class="glyphicon glyphicon-edit"></i>
-		</a>
-		<a class="btn btn-primary" data-ng-click="remove();">
-			<i class="glyphicon glyphicon-trash"></i>
-		</a>
-	</div>
-	<small>
-		<em class="text-muted">
-			Posted on
-			<span data-ng-bind="template.created | date:'mediumDate'"></span>
-			by
-			<span data-ng-bind="template.user.displayName"></span>
-		</em>
-	</small>
+<section data-ng-controller="TemplatesController" ng-init="findOne()">
+<div class="wrapper wrapper-content animated fadeInDown">
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content m-b-sm border-bottom">
+            <div class="p-xs">
+                <div class="pull-left m-r-md">
+                    <i class="fa fa-envelope-square mid-icon"></i>
+                </div>
+                <h2 style="color: red;">{{template.title}}  <a href="/#!/templates/{{template._id}}/edit" class="btn btn-white btn-bitbucket"><i class="fa fa-wrench"></i> Edit</a></h2> 
+                <span><strong>Created by:</strong> {{template.created_by.displayName}}</span>
+                </br>
+                <p></p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content">
+                <form class="form-horizontal" name="createForm" role="form" novalidate>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="title">Title</label> 
+                         <div class="col-sm-10">
+                        <input disabled="" ng-model="template.title" type="input" id="title" placeholder="" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="regions">Regions Affected</label> 
+                         <div class="col-sm-10">
+                        <input disabled="" ng-model="template.regions_affected" type="input" id="regions" placeholder="" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="services">Services Affected</label> 
+                         <div class="col-sm-10">
+                        <textarea disabled="" ng-model="template.services_affected" id="services" placeholder="" class="form-control" required> </textarea>
+                        </div>
+                    </div>
+
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="biz_impact">Business Impact</label> 
+                         <div class="col-sm-10">
+                        <textarea disabled="" ng-model="template.biz_impact" id="biz_impact" placeholder="" class="form-control" required> </textarea>
+                        </div>
+                    </div>
+
+
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="workaround">Email Distribution List</label> 
+                         <div class="col-sm-10">
+                        <input disabled="" ng-model="template.email_dlist" id="email_dlist" placeholder="comma separated (AMER.all, APAC.all)" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div data-ng-show="error" class="text-danger">
+                        <strong data-ng-bind="error"></strong>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </section>

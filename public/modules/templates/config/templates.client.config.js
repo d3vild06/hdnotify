@@ -7,5 +7,6 @@ angular.module('templates').run(['Menus',
 		// order of parameters
 		// menuId, menuItemTitle, menuItemURL, iconClass, menuItemType, menuItemUIRoute, isPublic, roles, position
 		Menus.addMenuItem('topbar', 'New Template', 'templates/create', 'fa-plus');
+		Menus.addMenuItem('topbar', 'Edit Template', 'templates', 'fa-pencil-square-o');
 	}
 ]);

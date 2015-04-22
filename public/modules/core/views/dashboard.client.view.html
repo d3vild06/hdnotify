@@ -3,7 +3,7 @@
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>Welcome <span data-ng-bind="authentication.user.displayName"></span></h5>
+                <h5>Welcome <span data-ng-bind="authentication.user.fullname"></span></h5>
             </div>
             <div class="ibox-content m-b-sm border-bottom">
             <div class="p-xs">
@@ -45,7 +45,7 @@
             </thead>
             <tbody>
             <!-- if you want to filter based on status add: filter:{status:'active'} -->
-            <tr data-ng-repeat="notice in notices | filter: query | orderBy: '-updated_at'" ng-switch on="notice.status == 'active'">
+            <tr data-ng-repeat="notice in notices | filter: query | orderBy: 'status'" ng-switch on="notice.status == 'active'">
                 <td>{{notice.outage_start_time | date: 'medium'}}</td>
                 <td style="width:30px">{{notice.priority}}</td>
                 <td>{{notice.ticket_number}}</td>

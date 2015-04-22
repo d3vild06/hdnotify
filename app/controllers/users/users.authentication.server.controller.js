@@ -52,7 +52,9 @@ exports.signup = function(req, res) {
 exports.signin = function(req, res, next) {
 	passport.authenticate('local', function(err, user, info) {
 		if (err || !user) {
-			res.status(400).send(info);
+			console.log('passport cb error: '+ err);
+			console.log('passport cb info: '+ info);
+			res.status(401).send({message: 'Invalid Username or Password'});
 		} else {
 			// Remove sensitive data before login
 			user.password = undefined;
@@ -62,6 +64,7 @@ exports.signin = function(req, res, next) {
 				if (err) {
 					res.status(400).send(err);
 				} else {
+					console.log(JSON.stringify(user));
 					res.json(user);
 				}
 			});

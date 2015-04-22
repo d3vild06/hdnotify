@@ -21,8 +21,6 @@ angular.module('templates').controller('TemplatesController', ['$scope', '$state
 			template.$save(function(response) {
 				$location.path('templates/' + response._id);
 
-				// Clear form fields
-				$scope.name = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});

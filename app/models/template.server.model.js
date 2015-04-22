@@ -36,7 +36,8 @@ var TemplateSchema = new Schema({
 		ref: 'Notice'
 	}],
 	created_by: {
-		type: String
+		type: String,
+		ref: 'User'
 	}
 });
 

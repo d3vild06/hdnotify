@@ -3,6 +3,7 @@
 /**
  * Module dependencies.
  */
+
 var fs = require('fs'),
 	http = require('http'),
 	https = require('https'),
@@ -24,9 +25,11 @@ var fs = require('fs'),
 	path = require('path'),
 	swig = require('swig');
 
+
 module.exports = function(db) {
 	// Initialize express app
 	var app = express();
+
 
 	// Globbing model files
 	config.getGlobbedFiles('./app/models/**/*.js').forEach(function(modelPath) {

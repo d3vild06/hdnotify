@@ -103,7 +103,7 @@ angular.module('notices').controller('NoticesController', ['$scope', '$statePara
 		* this will help set debug options
 		*/
 		
-		$scope.server = Notices.getEnv();
+		// $scope.server = Notices.getEnv();
 
 
 

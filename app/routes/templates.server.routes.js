@@ -11,7 +11,7 @@ module.exports = function(app) {
 
 	app.route('/templates/:templateId')
 		.get(templates.read)
-		.put(users.requiresLogin, templates.hasAuthorization, templates.update)
+		.put(users.requiresLogin, templates.update)
 		.delete(users.requiresLogin, templates.hasAuthorization, templates.delete);
 
 	// Finish by binding the Template middleware
