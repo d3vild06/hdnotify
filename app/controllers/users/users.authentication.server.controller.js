@@ -53,8 +53,7 @@ exports.signin = function(req, res, next) {
 	passport.authenticate('local', function(err, user, info) {
 		if (err || !user) {
 			console.log('passport cb error: '+ err);
-			console.log('passport cb info: '+ info);
-			res.status(401).send({message: 'Invalid Username or Password'});
+			res.status(400).send(err);
 		} else {
 			// Remove sensitive data before login
 			user.password = undefined;
@@ -64,7 +63,7 @@ exports.signin = function(req, res, next) {
 				if (err) {
 					res.status(400).send(err);
 				} else {
-					console.log(JSON.stringify(user));
+					// console.log(JSON.stringify(user));
 					res.json(user);
 				}
 			});
@@ -99,6 +98,47 @@ exports.oauthCallback = function(strategy) {
 		})(req, res, next);
 	};
 };
+/** 
+ * Helper function to save or update new LDAP user profile
+ */
+
+ exports.saveLDAPUserProfile = function(req, LDAPUserProfile, done) {
+ 	if(!req.user) {
+ 		// search to see if the user already exist
+ 		var username = LDAPUserProfile.username;
+ 		User.findOne({username: username}, function(err, user) {
+ 			if (err) {
+ 				return done(err);
+ 			} else {
+ 				if (!user) {
+ 					var possibleUsername = username;
+ 					User.findUniqueUsername(possibleUsername, null, function(availableUsername) {
+			 			user = new User({
+			 				firstName: LDAPUserProfile.firstName,
+			 				lastName: LDAPUserProfile.lastName,
+			 				displayName: LDAPUserProfile.displayName,
+			 				email: LDAPUserProfile.email,
+			 				username: LDAPUserProfile.username,
+			 				provider: LDAPUserProfile.provider
+			 			});
+			 			// if user doesn't exist, lets save!
+			 			user.save(function(err) {
+			 				return done(err, user);
+			 			});
+					});
+
+				} else {
+					return done(err, user);
+				}
+ 			}
+
+
+ 		});	
+
+ 	}
+
+ };
+
 
 /**
  * Helper function to save or update a OAuth user profile

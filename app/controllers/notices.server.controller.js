@@ -22,7 +22,6 @@ var mongoose = require('mongoose'),
 exports.create = function(req, res) {
 	var notice = new Notice(req.body);
 	//capture the logged in username
-	//notice.created_by = req.user.username;
 	notice.created_by = req.user._id;
 
 

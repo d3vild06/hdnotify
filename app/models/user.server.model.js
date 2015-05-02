@@ -10,9 +10,9 @@ var mongoose = require('mongoose'),
 /**
  * A Validation function for local strategy properties
  */
-var validateLocalStrategyProperty = function(property) {
-	return ((this.provider !== 'local' && !this.updated) || property.length);
-};
+// var validateLocalStrategyProperty = function(property) {
+// 	return ((this.provider !== 'local' && !this.updated) || property.length);
+// };
 
 /**
  * A Validation function for local strategy password
@@ -29,13 +29,13 @@ var UserSchema = new Schema({
 		type: String,
 		trim: true,
 		default: '',
-		validate: [validateLocalStrategyProperty, 'Please fill in your first name']
+		// validate: [validateLocalStrategyProperty, 'Please fill in your first name']
 	},
 	lastName: {
 		type: String,
 		trim: true,
 		default: '',
-		validate: [validateLocalStrategyProperty, 'Please fill in your last name']
+		// validate: [validateLocalStrategyProperty, 'Please fill in your last name']
 	},
 	displayName: {
 		type: String,
@@ -45,7 +45,7 @@ var UserSchema = new Schema({
 		type: String,
 		trim: true,
 		default: '',
-		validate: [validateLocalStrategyProperty, 'Please fill in your email'],
+		// validate: [validateLocalStrategyProperty, 'Please fill in your email'],
 		match: [/.+\@.+\..+/, 'Please fill a valid email address']
 	},
 	username: {
@@ -54,14 +54,14 @@ var UserSchema = new Schema({
 		required: 'Please fill in a username',
 		trim: true
 	},
-	password: {
-		type: String,
-		default: '',
-		validate: [validateLocalStrategyPassword, 'Password should be longer']
-	},
-	salt: {
-		type: String
-	},
+	// password: {
+	// 	type: String,
+	// 	default: '',
+	// 	validate: [validateLocalStrategyPassword, 'Password should be longer']
+	// },
+	// salt: {
+	// 	type: String
+	// },
 	provider: {
 		type: String,
 		required: 'Provider is required'
@@ -87,12 +87,12 @@ var UserSchema = new Schema({
 		default: Date.now
 	},
 	/* For reset password */
-	resetPasswordToken: {
-		type: String
-	},
-	resetPasswordExpires: {
-		type: Date
-	}
+	// resetPasswordToken: {
+	// 	type: String
+	// },
+	// resetPasswordExpires: {
+	// 	type: Date
+	// }
 });
 
 /**

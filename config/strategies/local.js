@@ -7,10 +7,11 @@ var passport = require('passport'),
 	LocalStrategy = require('passport-local').Strategy,
 	config = require('../config'),
 	User = require('mongoose').model('User'),
+	users = require('../../app/controllers/users.server.controller'),
 	ActiveDirectory = require('activedirectory'),
 	ad = new ActiveDirectory({
 		url: config.ldap.server,
-		baseDN: 'OU=SERVICE ACCOUNTS, OU=SCC, DC=corp,DC=hds,DC=com',
+		baseDN: 'DC=corp,DC=hds,DC=com',
 		username: config.ldap.adminuser,
 		password: config.ldap.adminpass,
 		logging: {
@@ -22,72 +23,47 @@ var passport = require('passport'),
     }
 	});
 
-	var opts = {
-			filter: '(objectCategory=Person)'
-		};
 
 module.exports = function() {
 	// Use local strategy with AD module!
 	passport.use(new LocalStrategy({
 			usernameField: 'username',
-			passwordField: 'password'
+			passwordField: 'password',
+			passReqToCallback: true
 		},
-		function(username, password, done) {
+		function(req, username, password, done) {
 			username = 'HDS\\' + username;
+			// get user AD info
+			var sAMAccountName = username.slice(4);
 				ad.authenticate(username, password, function(err, user) {
-				if (err) {
-					return done(err);
-				}
-				
-				if (!user) {
-					return done(null, false, { message: 'Invalid username or password' });
-				}
+						ad.findUser(sAMAccountName, function(err, user){
+							if (err) {
+								console.log('find user error: '+JSON.stringify(err));
+								return done(err);
+							}
+							if (!user){
+								return done(null, false, { message: 'Invalid username or password'});
+							}
+							else {
+								console.log(user.sAMAccountName);
 
-				// get user AD info
-				// var sAMAaccountName = username.slice(4);
-				
-				// 	ad.findUser(opts, sAMAaccountName, function(err, user) {
-				// 	if (err) {
-				// 		console.log('RQ ERROR: '+JSON.stringify(err) + 'sAMAaccountName passed: '+sAMAaccountName);
-				// 		return err;
-				// 	}
-				// 	// if (!user){
-				// 	// 	console.log('User: '+ sAMAaccountName + ' not found!');
-				// 	// 	return done(null, false);
-				// 	// }
-				// 	else {
-				// 		console.log(JSON.stringify(user));
-				// 		return user;	
-				// 	}
-					
-				// });
+								// create LDAP user profile info
+								var providerUserProfile = {
+									firstName: user.givenName,
+									lastName: user.sn,
+									displayName: user.displayName,
+									email: user.mail,
+									username: user.sAMAccountName,
+									provider: 'local'
+								};
+								console.log(providerUserProfile.username);
+								// save user profile to db if they do not exist
+								users.saveLDAPUserProfile(req, providerUserProfile, done);
+								// return done(null, user);
+							}
+							
 
-				// if user successfully authenticates, return the user
-				else {
-						// console.log(JSON.stringify(user));
-						return done(null, {
-							username: user.displayName
 						});
-					}
-				// var userCookie = {
-				// 	fullname: displayName
-				// };
-
-				// return done(null, {
-				// 	username: username
-				// });
-
-
-				// if (!user) {
-				// 	return done(null, false, {
-				// 		message: 'Unknown user or invalid password'
-				// 	});
-				// }
-				// if (!user.authenticate(password)) {
-				// 	return done(null, false, {
-				// 		message: 'Unknown user or invalid password'
-				// 	});
-				// }
 
 				
 			});
