@@ -2,6 +2,17 @@
 
 module.exports = {
 	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR) || 'localhost' + '/hdnotify',
+	app: {
+		title: 'HDNotify - Notification Center',
+		description: 'Web Notification Tool',
+		keywords: 'MongoDB, Express, AngularJS, Node.js, Web',
+		
+	},
+	version: '0.0.1',
+	port: process.env.PORT || 3000,
+	templateEngine: 'swig',
+	sessionSecret: process.env.SESSION_SECRET || '',
+	sessionCollection: 'sessions',
 	assets: {
 		lib: {
 			css: [
