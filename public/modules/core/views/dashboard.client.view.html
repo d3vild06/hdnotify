@@ -36,8 +36,9 @@
                 <th>Outage Start Time</th>
                 <th>Priority</th>
                 <th>Ticket #</th>
-                <th>Title</th>
-                <th>Services Affected</th>
+                <th>Subject</th>
+                <th>Impacted Services</th>
+                <th>Duration (mins)</th>
                 <th>Status</th>
                 <th data-ng-show="authentication.user">Action</th>
                 
@@ -45,12 +46,13 @@
             </thead>
             <tbody>
             <!-- if you want to filter based on status add: filter:{status:'active'} -->
-            <tr data-ng-repeat="notice in notices | filter: query | orderBy: 'status'" ng-switch on="notice.status == 'active'">
+            <tr data-ng-repeat="notice in notices | startFrom: pagination.page * pagination.perPage | limitTo: pagination.perPage | filter: query | orderBy:'-updated_at'" ng-switch on="notice.status == 'active'">
                 <td>{{notice.outage_start_time | date: 'medium'}}</td>
                 <td style="width:30px">{{notice.priority}}</td>
                 <td>{{notice.ticket_number}}</td>
-                <td>{{notice.title}}</td>
-                <td>{{notice.services_affected}}</td>
+                <td>{{notice.subject}}</td>
+                <td>{{notice.impacted_services}}</td>
+                <td style="width: 25px">{{notice.outage_duration}}</td>
                 <td align="center" ng-switch-when="true">
                 <small class="label label-primary">{{notice.status}}</small>
                 <a ng-hide="authentication.user" href="/#!/notices/{{notice._id}}"><small class="label label-info"><i class="fa fa-eye"></i></small></a>
@@ -64,9 +66,18 @@
                 </td>
                 <td align="center" ng-switch-default ng-show="authentication.user">
                 <a href="/#!/notices/{{notice._id}}"><small class="label label-info"><i class="fa fa-eye"></i></small></a></td>
-            </tr>
-            </tbody>
+            </tr> 
+            </tbody> 
             </table>
+            <ul class="pagination">
+                <li><a href="" ng-click="pagination.prevPage()">&laquo;</a></li>
+                  <li ng-repeat="n in [] | range: pagination.numPages" ng-class="{active: n == pagination.page}">
+                  <a href="" ng-click="pagination.toPageId(n)">{{n + 1}}</a>
+                  </li>
+                  <li><a href="" ng-click="pagination.nextPage()">&raquo;</a></li>
+                </ul>  
+             
+                {{pagination.page}} {{pagination.numPages}} {{notices.length}} {{pagination.perPage}}
         </div>
     </div>
 </div>

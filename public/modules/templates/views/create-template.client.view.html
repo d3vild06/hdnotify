@@ -22,34 +22,34 @@
             <div class="ibox-content">
                 <form class="form-horizontal" name="createForm" role="form" data-ng-submit="create()" novalidate>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label" for="title">Title</label> 
+                        <label class="col-sm-2 control-label" for="subject">Subject</label> 
                          <div class="col-sm-10">
-                        <input ng-model="title" type="input" id="title" placeholder="" class="form-control" required>
+                        <input ng-model="subject" type="input" id="subject" placeholder="" class="form-control" required>
                         </div>
                     </div>
 
                     <div class="hr-line-dashed"></div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 control-label" for="regions">Regions Affected</label> 
+                        <label class="col-sm-2 control-label" for="regions">Affected Region(s)</label> 
                          <div class="col-sm-10">
-                        <input ng-model="regions_affected" type="input" id="regions" placeholder="" class="form-control" required>
+                        <input ng-model="affected_regions" type="input" id="regions" placeholder="" class="form-control" required>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label" for="services">Services Affected</label> 
+                        <label class="col-sm-2 control-label" for="services">Impacted Service(s)</label> 
                          <div class="col-sm-10">
-                        <textarea ng-model="services_affected" id="services" placeholder="" class="form-control" required> </textarea>
+                        <textarea ng-model="impacted_services" id="services" placeholder="" class="form-control" required> </textarea>
                         </div>
                     </div>
 
                     <div class="hr-line-dashed"></div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 control-label" for="biz_impact">Business Impact</label> 
+                        <label class="col-sm-2 control-label" for="biz_impact">Description</label> 
                          <div class="col-sm-10">
-                        <textarea ng-model="biz_impact" id="biz_impact" placeholder="" class="form-control" required> </textarea>
+                        <textarea ng-model="description" id="description" placeholder="" class="form-control" required> </textarea>
                         </div>
                     </div>
 

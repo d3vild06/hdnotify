@@ -8,7 +8,7 @@
                 <div class="pull-left m-r-md">
                     <i class="fa fa-envelope-square mid-icon"></i>
                 </div>
-                <h2 style="color: red;">{{template.title}}  <a href="/#!/templates/{{template._id}}/edit" class="btn btn-white btn-bitbucket"><i class="fa fa-wrench"></i> Edit</a></h2> 
+                <h2 style="color: red;">{{template.subject}}  <a href="/#!/templates/{{template._id}}/edit" class="btn btn-white btn-bitbucket"><i class="fa fa-wrench"></i> Edit</a></h2> 
                 <span><strong>Created by:</strong> {{template.created_by.displayName}}</span>
                 </br>
                 <p></p>
@@ -24,34 +24,34 @@
             <div class="ibox-content">
                 <form class="form-horizontal" name="createForm" role="form" novalidate>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label" for="title">Title</label> 
+                        <label class="col-sm-2 control-label" for="subject">Subject</label> 
                          <div class="col-sm-10">
-                        <input disabled="" ng-model="template.title" type="input" id="title" placeholder="" class="form-control" required>
+                        <input disabled="" ng-model="template.subject" type="input" id="subject" placeholder="" class="form-control" required>
                         </div>
                     </div>
 
                     <div class="hr-line-dashed"></div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 control-label" for="regions">Regions Affected</label> 
+                        <label class="col-sm-2 control-label" for="regions">Affected Region(s)</label> 
                          <div class="col-sm-10">
-                        <input disabled="" ng-model="template.regions_affected" type="input" id="regions" placeholder="" class="form-control" required>
+                        <input disabled="" ng-model="template.affected_regions" type="input" id="regions" placeholder="" class="form-control" required>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label" for="services">Services Affected</label> 
+                        <label class="col-sm-2 control-label" for="services">Impacted Service(s)</label> 
                          <div class="col-sm-10">
-                        <textarea disabled="" ng-model="template.services_affected" id="services" placeholder="" class="form-control" required> </textarea>
+                        <textarea disabled="" ng-model="template.impacted_services" id="services" placeholder="" class="form-control" required> </textarea>
                         </div>
                     </div>
 
                     <div class="hr-line-dashed"></div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 control-label" for="biz_impact">Business Impact</label> 
+                        <label class="col-sm-2 control-label" for="description">Description</label> 
                          <div class="col-sm-10">
-                        <textarea disabled="" ng-model="template.biz_impact" id="biz_impact" placeholder="" class="form-control" required> </textarea>
+                        <textarea disabled="" ng-model="template.description" id="description" placeholder="" class="form-control" required> </textarea>
                         </div>
                     </div>
 

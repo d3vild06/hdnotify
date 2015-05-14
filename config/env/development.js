@@ -8,7 +8,8 @@ module.exports = {
 	ldap: {
 		server: process.env.LDAP_SERVER || '',
 		adminuser: process.env.LDAP_ADMINUSER || '',
-		adminpass: process.env.LDAP_ADMINPASS || ''
+		adminpass: process.env.LDAP_ADMINPASS || '',
+		securityGroup: process.env.LDAP_SECURITY_GROUP || ''
 	},
 	
 	facebook: {

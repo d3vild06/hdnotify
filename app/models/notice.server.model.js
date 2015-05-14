@@ -24,10 +24,10 @@ var NoticeSchema = new Schema({
         type: String,
         enum: ['active', 'closed']
     },
-    auto_update: {
-        type: Number,
-        default: 60
-    },
+    // auto_update: {
+    //     type: Number,
+    //     default: 60
+    // },
     ticket_number: {
         type: String,
         required: true
@@ -37,11 +37,11 @@ var NoticeSchema = new Schema({
         enum: ['1', '2'],
         required: true
     },
-    title: {
+    subject: {
         type: String,
         required: true
     },
-    services_affected: {
+    impacted_services: {
         type: String,
         required: true
     },
@@ -49,14 +49,14 @@ var NoticeSchema = new Schema({
     //     type: String,
     //     required: true
     // },
-    biz_impact: {
+    description: {
         type: String,
         required: true
     },
-    workaround: {
-        type: String,
-        required: true
-    },
+    // workaround: {
+    //     type: String,
+    //     required: true
+    // },
     email_dlist: {
         type: String,
         required: true
@@ -69,7 +69,7 @@ var NoticeSchema = new Schema({
     resolution: {
         type: String
     },
-    regions_affected: {
+    affected_regions: {
         type: String,
         required: true
     },
@@ -80,8 +80,8 @@ var NoticeSchema = new Schema({
     outage_end_time: {
         type: Date
     },
-    outage_total_time: {
-        type: Number
+    outage_duration: {
+        type: String
     },
     created_by: {
         type: String,

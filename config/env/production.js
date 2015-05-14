@@ -23,6 +23,13 @@ module.exports = {
 		css: 'public/dist/application.min.css',
 		js: 'public/dist/application.min.js'
 	},
+
+	ldap: {
+		server: process.env.LDAP_SERVER || '',
+		adminuser: process.env.LDAP_ADMINUSER || '',
+		adminpass: process.env.LDAP_ADMINPASS || '',
+		securityGroup: process.env.LDAP_SECURITY_GROUP || ''
+	},
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || 'APP_ID',
 		clientSecret: process.env.FACEBOOK_SECRET || 'APP_SECRET',

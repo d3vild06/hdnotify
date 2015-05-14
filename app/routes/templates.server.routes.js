@@ -12,7 +12,8 @@ module.exports = function(app) {
 	app.route('/templates/:templateId')
 		.get(templates.read)
 		.put(users.requiresLogin, templates.update)
-		.delete(users.requiresLogin, templates.hasAuthorization, templates.delete);
+		.delete(templates.delete);
+		// .delete(users.requiresLogin, templates.hasAuthorization, templates.delete);
 
 	// Finish by binding the Template middleware
 	app.param('templateId', templates.templateByID);

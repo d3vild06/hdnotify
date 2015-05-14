@@ -12,7 +12,7 @@
                                     <tr>
                                         <th>Date Created</th>
                                         <th>Ticket #</th>
-                                        <th>Title</th>
+                                        <th>Subject</th>
                                         <th>Priority</th>
                                         <th>Status</th>
                                         <th>Created By</th>
@@ -23,7 +23,7 @@
                                     <tr>
                                         <td>{{notice.created_at | date: 'medium'}}</td>
                                         <td><a target="_blank" ng-href="http://helpdesk.hds.com/sm/index.do?ctx=docEngine&file=probsummary&query=number=%22{{notice.ticket_number}}%22">{{notice.ticket_number}}</a></td>
-                                        <td>{{notice.title}}</td>
+                                        <td>{{notice.subject}}</td>
                                         <td>{{notice.priority}}</td>
                                         <td><small class="label label-primary">{{notice.status}}</small></td>
                                         <td>{{notice.created_by.username}}</td>
@@ -51,9 +51,9 @@
                         <form name="createForm" role="form" data-ng-submit="create()" novalidate>
                         <div class="col-sm-4 b-r">
                          <div class="form-group">
-                         <label for="type">Select Affected Service</label>
-                            <select ng-model="noticeForm" ng-options="t.services_affected for t in templates" class="form-control m-b" name="service">
-                            <option value="">-- select a service --</option>
+                         <label for="type">Select Template</label>
+                            <select ng-model="noticeForm" ng-options="t.subject for t in templates" class="form-control m-b" name="subject">
+                            <option value="">-- select a template --</option>
                             </select>
                         </div>
                          <div class="form-group">
@@ -65,7 +65,7 @@
                         </div>
                        
                          <div class="form-group">
-                            <label class="font-normal">Outage Start Time</label>
+                            <label class="font-normal">Outage Start</label>
 
                             <div class="dropdown">
                                 <a class="dropdown-toggle date-toggle" id="dLabel" role="button" data-toggle="dropdown" data-disabled="true" data-target="#" href="">
@@ -92,46 +92,47 @@
                                         <option value="2">2</option>
                                 </select>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                  <label for="type">Auto-Update Interval (minutes)</label>
                                     <select ng-model="update_time" class="form-control m-b" id="update_time" name="update" required>
                                         <option value="60">60</option>
                                         <option value="30">30</option>
                                 </select>
-                            </div>
+                            </div> -->
 
                             
                             </div>
                             <!-- right side of the form - where data is autopopulated based on the affected service selected -->
                                <div class="col-sm-8">
                                     <div class="form-group">
-                                        <label for="title">Title</label> 
-                                        <input ng-model="noticeForm.title" type="input" id="title" placeholder="" class="form-control" required>
+                                        <label for="title">Subject</label> 
+                                        <input ng-model="noticeForm.subject" type="input" id="subject" placeholder="" class="form-control" required>
                                     </div>
 
                                     <!-- <div class="form-group">
                                         <label for="reason">ITSB Reason</label> 
                                         <input ng-model="noticeForm.reason" type="input" id="reason" placeholder="" class="form-control">
                                     </div> -->
-
-                                    <div class="form-group">
-                                        <label for="regions">Regions Affected</label> 
-                                        <input ng-model="noticeForm.regions_affected" type="input" id="regions" placeholder="" class="form-control" required>
+                                     <div class="form-group">
+                                        <label for="services">Impacted Service(s)</label> 
+                                        <textarea ng-model="noticeForm.impacted_services" id="services" placeholder="" class="form-control" required> </textarea>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="services">Services Affected</label> 
-                                        <textarea ng-model="noticeForm.services_affected" id="services" placeholder="" class="form-control" required> </textarea>
+                                        <label for="regions">Affected Region(s)</label> 
+                                        <input ng-model="noticeForm.affected_regions" type="input" id="regions" placeholder="" class="form-control" required>
+                                    </div>
+
+                                   
+
+                                    <div class="form-group">
+                                        <label for="biz_impact">Description</label> 
+                                        <textarea ng-model="noticeForm.description" id="description" placeholder="" class="form-control" required> </textarea>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="biz_impact">Business Impact</label> 
-                                        <textarea ng-model="noticeForm.biz_impact" id="biz_impact" placeholder="" class="form-control" required> </textarea>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="workaround">Workaround</label> 
-                                        <textarea ng-model="noticeForm.workaround" id="workaround" placeholder="" class="form-control" required> </textarea>
+                                        <label for="workaround">Status</label> 
+                                        <textarea ng-model="noticeForm.status_update" id="status" placeholder="" class="form-control" required> </textarea>
                                     </div>
   
                                     <div class="form-group">

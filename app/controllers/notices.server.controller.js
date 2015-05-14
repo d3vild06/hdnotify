@@ -43,14 +43,15 @@ exports.create = function(req, res) {
 
 
 			var emailHtmlnew = {
-				title: req.body.title,
-				reason: req.body.notice_type,
-				regions: req.body.regions_affected,
+				subject: req.body.subject,
+				// reason: req.body.notice_type,
+				affected_regions: req.body.affected_regions,
 				outage_start_time: req.body.outage_start_time,
-				services: req.body.services_affected,
-				biz_impact: req.body.biz_impact,
-				ticket_number: req.body.ticket_number,
-				workaround: req.body.workaround
+				impacted_services: req.body.impacted_services,
+				description: req.body.description,
+				status_update: req.body.status_update,
+				ticket_number: req.body.ticket_number
+				// workaround: req.body.workaround
 			};
 			template('new-notice', emailHtmlnew, function(err, html, text) {
 			      if (err) {
@@ -63,7 +64,7 @@ exports.create = function(req, res) {
 			var mailOptions = {
 				to: req.body.email_dlist,
 				from: config.mailer.from,
-				subject: 'IT Service Bulletin - ' + req.body.title + ' - ' +req.body.regions_affected + ' - Unplanned Outage (New)',	
+				subject: 'IT Service Bulletin - ' + req.body.subject + ' - ' +req.body.affected_regions + ' - Outage (New)',	
 				html: html
 			};
 			transporter.sendMail(mailOptions, function(err) {
@@ -98,6 +99,8 @@ exports.read = function(req, res) {
 /**
  * Update a Notice
  */
+
+
 exports.update = function(req, res) {
 	var notice = req.notice;
 	var reason;
@@ -107,10 +110,20 @@ exports.update = function(req, res) {
 	notice = _.extend(notice , req.body);
 	// capture update number for subsequent email updates
 	var new_count = ++count;
-
+	var id = notice.id;
+	var start = new Date(notice.outage_start_time);
+	var end = new Date(notice.outage_end_time);
+	// console.log('START TIME IS: '+start);
+	// console.log('END TIME IS: '+end);
+	var diff = end - start;
+	var duration = Math.floor(diff / 60e3);
+	// console.log('TOTAL DURATION IS: '+duration);
+	
 
 	if (req.body.status === 'closed') {
 		reason = 'resolution';
+		notice.outage_duration = duration;
+
 	} else {
 		reason = 'update';
 	}
@@ -138,25 +151,25 @@ exports.update = function(req, res) {
 
 			// update email
 			var emailHtml1 = {
-				title: req.body.title,
-				reason: req.body.notice_type,
-				regions: req.body.regions_affected,
+				subject: req.body.subject,
+				// reason: req.body.notice_type,
+				affected_regions: req.body.affected_regions,
 				outage_start_time: req.body.outage_start_time,
-				services: req.body.services_affected,
-				biz_impact: req.body.biz_impact,
+				impacted_services: req.body.impacted_services,
+				description: req.body.description,
 				status_update: req.body.status_update,
 				ticket_number: req.body.ticket_number
 			};
 
 			// resolution email
 			var emailHtml2 = {
-				title: req.body.title,
-				reason: req.body.notice_type,
-				regions: req.body.regions_affected,
+				subject: req.body.subject,
+				// reason: req.body.notice_type,
+				affected_regions: req.body.affected_regions,
 				outage_start_time: req.body.outage_start_time,
 				outage_end_time: req.body.outage_end_time,
-				services: req.body.services_affected,
-				biz_impact: req.body.biz_impact,
+				impacted_services: req.body.impacted_services,
+				description: req.body.description,
 				status_update: req.body.status_update,
 				ticket_number: req.body.ticket_number
 			};
@@ -187,7 +200,7 @@ exports.update = function(req, res) {
 			var mailOptions = {
 				to: req.body.email_dlist,
 				from: config.mailer.from,
-				subject: 'IT Service Bulletin - ' + req.body.title + ' - ' +req.body.regions_affected + ' - Unplanned Outage ('+status_string+')', 	
+				subject: 'IT Service Bulletin - ' + req.body.subject + ' - ' +req.body.affected_regions + ' - Outage ('+status_string+')', 	
 				html: html
 			};
 			transporter.sendMail(mailOptions, function(err) {

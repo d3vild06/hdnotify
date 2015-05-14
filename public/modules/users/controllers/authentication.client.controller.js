@@ -28,11 +28,13 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 				// And redirect to the index page
 				$location.path('/');
 			}).error(function(response) {
-				// var errorMessage;
-				// if (response.name === 'InvalidCredentialsError') {
-				// 	errorMessage = 'Invalid Username or Password';
-				// }
+				var errorMessage;
+				if (response.name === 'InvalidCredentialsError') {
+					$scope.error = 'Invalid Username or Password';
+				}
+				else {
 				$scope.error = response.message;
+				}
 			});
 		};
 	}

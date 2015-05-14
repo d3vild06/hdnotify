@@ -51,10 +51,15 @@ exports.signup = function(req, res) {
  */
 exports.signin = function(req, res, next) {
 	passport.authenticate('local', function(err, user, info) {
-		if (err || !user) {
-			console.log('passport cb error: '+ err);
+		if (err) {
+			console.log('passport cb error: '+ JSON.stringify(err));
 			res.status(400).send(err);
-		} else {
+		} 
+		if (!user) {
+			res.status(400).send(info);
+		}
+
+		else {
 			// Remove sensitive data before login
 			user.password = undefined;
 			user.salt = undefined;

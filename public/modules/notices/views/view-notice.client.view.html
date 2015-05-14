@@ -13,7 +13,7 @@
                <table class="table table-hover table-bordered">
                     <thead>
                     <tr>
-                        <th>Title</th>
+                        <th>Subject</th>
                         <th>Ticket #</th>
                         <th>Priority</th>
                         <th>Status</th>
@@ -25,7 +25,7 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td>{{notice.title}}</td>
+                        <td>{{notice.subject}}</td>
                         <td><a target="_blank" ng-href="http://helpdesk.hds.com/sm/index.do?ctx=docEngine&file=probsummary&query=number=%22{{notice.ticket_number}}%22">{{notice.ticket_number}}</a></td>
                         <td>{{notice.priority}}</td>
                         <td><small class="label label-primary">{{notice.status}}</small></td>

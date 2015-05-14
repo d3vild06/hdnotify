@@ -18,7 +18,8 @@
     "metisMenu": "~1.1.3",
     "fontawesome": "~4.2.0",
     "PACE": "https://github.com/HubSpot/pace.git#~0.5.7",
-    "angular-bootstrap-datetimepicker": "latest"
+    "angular-bootstrap-datetimepicker": "latest",
+    "ng-simplePagination": "~1.0.3"
   },
   "resolutions": {
     "angular": "1.2.28"

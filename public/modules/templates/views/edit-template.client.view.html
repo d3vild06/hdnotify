@@ -8,7 +8,7 @@
                 <div class="pull-left m-r-md">
                     <i class="fa fa-envelope-square mid-icon"></i>
                 </div>
-                <h2 style="color: red;">{{template.title}}</h2> 
+                <h2 style="color: red;">{{template.subject}}</h2> 
                 <span><strong>Created by:</strong> {{template.created_by.displayName}}</span>
             </div>
         </div>
@@ -22,34 +22,34 @@
         <div class="ibox-content">
             <form class="form-horizontal" name="createForm" role="form" data-ng-submit="update()" novalidate>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="title">Title</label> 
+                    <label class="col-sm-2 control-label" for="subject">Subject</label> 
                      <div class="col-sm-10">
-                    <input ng-model="template.title" type="input" id="title" placeholder="" class="form-control" required>
+                    <input ng-model="template.subject" type="input" id="subject" placeholder="" class="form-control" required>
                     </div>
                 </div>
 
                 <div class="hr-line-dashed"></div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="regions">Regions Affected</label> 
+                    <label class="col-sm-2 control-label" for="regions">Affected Region(s)</label> 
                      <div class="col-sm-10">
-                    <input ng-model="template.regions_affected" type="input" id="regions" placeholder="" class="form-control" required>
+                    <input ng-model="template.affected_regions" type="input" id="regions" placeholder="" class="form-control" required>
                     </div>
                 </div>
                 <div class="hr-line-dashed"></div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="services">Services Affected</label> 
+                    <label class="col-sm-2 control-label" for="services">Impacted Service(s)</label> 
                      <div class="col-sm-10">
-                    <textarea ng-model="template.services_affected" id="services" placeholder="" class="form-control" required> </textarea>
+                    <textarea ng-model="template.impacted_services" id="services" placeholder="" class="form-control" required> </textarea>
                     </div>
                 </div>
 
                 <div class="hr-line-dashed"></div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="biz_impact">Business Impact</label> 
+                    <label class="col-sm-2 control-label" for="description">Description</label> 
                      <div class="col-sm-10">
-                    <textarea ng-model="template.biz_impact" id="biz_impact" placeholder="" class="form-control" required> </textarea>
+                    <textarea ng-model="template.description" id="description" placeholder="" class="form-control" required> </textarea>
                     </div>
                 </div>
 
@@ -57,12 +57,13 @@
                 <div class="hr-line-dashed"></div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="workaround">Email Distribution List</label> 
-                     <div class="col-sm-10">
-                    <input ng-model="template.email_dlist" id="email_dlist" placeholder="comma separated (AMER.all, APAC.all)" class="form-control" required>
+                        <label class="col-sm-2 control-label" for="workaround">Email Distribution List</label> 
+                         <div class="col-sm-10">
+                        <input ng-model="template.email_dlist" id="email_dlist" placeholder="comma separated (AMER.all, APAC.all)" class="form-control" required>
+                        </div>
                     </div>
-                </div>
                 <br />
+                <div class="hr-line-dashed"></div>
                 <div class="form-group">
                     <div class="col-sm-2"></div>
                     <div class="col-sm-10">

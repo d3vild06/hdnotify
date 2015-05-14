@@ -31,10 +31,10 @@
         <table class="table table-hover table-bordered">
             <thead>
             <tr>
-                <th>Title</th>
-                <th>Regions Affected</th>
-                <th>Services Affected</th>
-                <th>Business Impact</th>
+                <th>Subject</th>
+                <th>Affected Region(s)</th>
+                <th>Impacted Service(s)</th>
+                <th>Description</th>
                 <th>Email Distribution List</th>
                 <th>View</th>
                 <th data-ng-show="authentication.user">Update</th>  
@@ -43,10 +43,10 @@
             <tbody>
             <!-- if you want to filter based on status add: filter:{status:'active'} -->
             <tr data-ng-repeat="template in templates | filter: query | orderBy: '-created_at' ">
-                <td>{{template.title}}</td>
-                <td>{{template.regions_affected}}</td>
-                <td>{{template.services_affected}}</td>
-                <td>{{template.biz_impact}}</td>
+                <td>{{template.subject}}</td>
+                <td>{{template.affected_regions}}</td>
+                <td>{{template.impacted_services}}</td>
+                <td>{{template.description}}</td>
                 <td>{{template.email_dlist}}</td>
                 <td>
                 <a href="/#!/templates/{{template._id}}"><small class="label label-info"><i class="fa fa-eye"></i></small></a>

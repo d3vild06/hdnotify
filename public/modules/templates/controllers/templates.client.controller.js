@@ -9,10 +9,10 @@ angular.module('templates').controller('TemplatesController', ['$scope', '$state
 		$scope.create = function() {
 			// Create new Template object
 			var template = new Templates ({
-				title: this.title,
-				regions_affected: this.regions_affected,
-				services_affected: this.services_affected,
-				biz_impact: this.biz_impact,
+				subject: this.subject,
+				affected_regions: this.affected_regions,
+				impacted_services: this.impacted_services,
+				description: this.description,
 				email_dlist: this.email_dlist
 
 			});

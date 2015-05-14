@@ -11,19 +11,19 @@ var timestamps = require('mongoose-timestamp'),
  * Templates Schema
  */
 var TemplateSchema = new Schema({
-	title: {
+	subject: {
 		type: String,
 		required: true
 	},
-	regions_affected: {
+	affected_regions: {
 		type: String,
 		required: true
 	},
-	services_affected: {
+	impacted_services: {
 		type: String,
 		required: true
 	},
-	biz_impact: {
+	description: {
 		type: String,
 		required: true
 	},

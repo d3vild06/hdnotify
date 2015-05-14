@@ -11,16 +11,17 @@ angular.module('notices').controller('NoticesController', ['$scope', '$statePara
 			// Create new Notice object
 			var notice = new Notices ({
 				notice_type: this.type,
-				title: this.noticeForm.title,
+				subject: this.noticeForm.subject,
 				status: 'active',
 				auto_update: this.update_time,
 				ticket_number: this.ticket,
 				priority: this.priority,
-				services_affected: this.noticeForm.services_affected,
-				biz_impact: this.noticeForm.biz_impact,
+				impacted_services: this.noticeForm.impacted_services,
+				description: this.noticeForm.description,
+				status_update: this.noticeForm.status_update,
 				outage_start_time: this.outage_start_time,
-				regions_affected: this.noticeForm.regions_affected,
-				workaround: this.noticeForm.workaround,
+				affected_regions: this.noticeForm.affected_regions,
+				// workaround: this.noticeForm.workaround,
 				email_dlist: this.noticeForm.email_dlist
 
 			});

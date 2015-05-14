@@ -36,6 +36,7 @@ module.exports = {
 				'public/lib/angular-ui-utils/ui-utils.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
 				'public/lib/angular-datepicker/dist/index.js',
+				'public/lib/ng-simplePagination/simplePagination.js',
 				'public/lib/moment/min/moment.min.js',
 				'public/lib/angular-bootstrap-datetimepicker/src/js/datetimepicker.js'
 			]

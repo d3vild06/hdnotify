@@ -11,7 +11,7 @@ var passport = require('passport'),
 	ActiveDirectory = require('activedirectory'),
 	ad = new ActiveDirectory({
 		url: config.ldap.server,
-		baseDN: 'DC=corp,DC=hds,DC=com',
+		baseDN: 'OU=DEN,OU=AMER,DC=corp,DC=hds,DC=com',
 		username: config.ldap.adminuser,
 		password: config.ldap.adminpass,
 		logging: {
@@ -33,37 +33,50 @@ module.exports = function() {
 		},
 		function(req, username, password, done) {
 			username = 'HDS\\' + username;
-			// get user AD info
 			var sAMAccountName = username.slice(4);
+			var securityGroup = config.ldap.securityGroup;
+			
 				ad.authenticate(username, password, function(err, user) {
-						ad.findUser(sAMAccountName, function(err, user){
-							if (err) {
-								console.log('find user error: '+JSON.stringify(err));
-								return done(err);
-							}
-							if (!user){
-								return done(null, false, { message: 'Invalid username or password'});
-							}
-							else {
-								console.log(user.sAMAccountName);
+						if (err) {
+							return done(err);
+						}
+						if (!user) {
+							return done(null, false, {message: 'Invalid username or password'});
+						}
+						else {
+							// check to see if user is part of defined security group
+							ad.isUserMemberOf(sAMAccountName, securityGroup, function(err, user){
+									if (!user) {
+										return done(null, false, { message: 'You are not authorized to access this application. Please contact the Help Desk for further assistance'});
+									}
+									// if user is part of group, search user and return LDAP info and store in DB if does not exist
+									else {
+										ad.findUser(sAMAccountName, function(err, user){
+											if (err) {
+												return done(err);
+											}
+											else {
 
-								// create LDAP user profile info
-								var providerUserProfile = {
-									firstName: user.givenName,
-									lastName: user.sn,
-									displayName: user.displayName,
-									email: user.mail,
-									username: user.sAMAccountName,
-									provider: 'local'
-								};
-								console.log(providerUserProfile.username);
-								// save user profile to db if they do not exist
-								users.saveLDAPUserProfile(req, providerUserProfile, done);
-								// return done(null, user);
-							}
-							
+										// create LDAP user profile info
+										var providerUserProfile = {
+											firstName: user.givenName,
+											lastName: user.sn,
+											displayName: user.displayName,
+											email: user.mail,
+											username: user.sAMAccountName,
+											provider: 'local'
+										};
+										// console.log(providerUserProfile.username);
+										// save user profile to db if they do not exist
+										users.saveLDAPUserProfile(req, providerUserProfile, done);
+										}
 
-						});
+										});
+									}
+
+							});
+
+					}
 
 				
 			});
