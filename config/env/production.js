@@ -3,7 +3,7 @@
 module.exports = {
 	db: 'mongodb://localhost/hdnotify',
 	app: {
-		title: 'HDNotify - Notification Center',
+		title: 'HDNotify PROD - Notification Center',
 		description: 'Web Notification Tool',
 		keywords: 'MongoDB, Express, AngularJS, Node.js, Web',
 		
