@@ -12,7 +12,7 @@
                                     <tr>
                                         <th>Outage Start Time</th>
                                         <th>Ticket #</th>
-                                        <th>Title</th>
+                                        <th>Subject</th>
                                         <th>Priority</th>
                                         <th>Status</th>
                                         <th>Opened By</th>
@@ -24,7 +24,7 @@
                                     <tr>
                                         <td>{{notice.outage_start_time | date: 'medium'}}</td>
                                         <td>{{notice.ticket_number}}</td>
-                                        <td>{{notice.title}}</td>
+                                        <td>{{notice.subject}}</td>
                                         <td>{{notice.priority}}</td>
                                         <td><small class="label label-primary">{{notice.status}}</small></td>
                                         <td>{{notice.created_by.username}}</td>
