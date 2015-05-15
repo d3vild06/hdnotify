@@ -11,7 +11,7 @@
                     <i class="fa fa-globe mid-icon"></i>
                 </div>
                 <h2 style="color: red;">HDNotify</h2>
-                <span>To create or update a notice, please ensure you are first logged in to access the action option. Note, you are only allowed to update an 'active' notice.</span>
+                <span>To create or update a notice, please <a href="/#!/signin">login</a> to access the action options. Note, you are only allowed to update an 'active' notice.</span>
             </div>
         </div>
     </div>
@@ -80,8 +80,6 @@
     </div>
 </div>
     </div>
-    <div class="alert alert-warning text-center" ng-show="authentication.user" data-ng-hide="!notices.$resolved || notices.length">
-        Nothing to see here yet. Time to create a new notice? <a href="/#!/notices/create">create</a> one now!
-    </div>
+
 </div>
 
