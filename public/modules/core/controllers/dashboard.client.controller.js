@@ -6,23 +6,22 @@ angular.module('core').controller('DashboardController', ['$scope', '$stateParam
 		// This provides Authentication context.
 		$scope.authentication = Authentication;
 
-		// Pagination stuff - defaults to 5 items per page
-		$scope.pagination = Pagination.getNew();
-
-
-		$scope.notices = Notices.query();
-
-		// calculate the number of pages to display based on the total amount of data from the db for notices
-		$scope.pagination.numPages = Math.ceil($scope.notices.length/$scope.pagination.perPage);
-		// $scope.pagination.numPages = 3;
-
-
-				// Find a list of Notices
+		// Find a list of Notices
 		$scope.find = function() {
-			$scope.notices = Notices.query();
+			$scope.notices = Notices.query(function (result){
+			// Pagination stuff - defaults to 5 items per page
+			$scope.pagination = Pagination.getNew(10);
+			var totalNotices = result.length;
+			// calculate the number of pages to display based on the total amount of data from the db for notices
+			$scope.pagination.numPages = Math.ceil(totalNotices / $scope.pagination.perPage);
 
-		};
 
+			});
+
+			
+
+			};
+		
 
 	}
 ]);

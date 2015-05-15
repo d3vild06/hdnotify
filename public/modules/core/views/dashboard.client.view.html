@@ -38,7 +38,7 @@
                 <th>Ticket #</th>
                 <th>Subject</th>
                 <th>Impacted Services</th>
-                <th>Duration (mins)</th>
+                <th>Duration</th>
                 <th>Status</th>
                 <th data-ng-show="authentication.user">Action</th>
                 
@@ -76,14 +76,12 @@
                   </li>
                   <li><a href="" ng-click="pagination.nextPage()">&raquo;</a></li>
                 </ul>  
-             
-                {{pagination.page}} {{pagination.numPages}} {{notices.length}} {{pagination.perPage}}
         </div>
     </div>
 </div>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!notices.$resolved || notices.length">
-        Nothing to see here yet. Need to create a new notice? <a href="/#!/notices/create">create one now</a>?
+        Nothing to see here yet. Time to create a new notice? <a href="/#!/notices/create">create one now</a>!
     </div>
 </div>
 

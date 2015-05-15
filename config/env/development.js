@@ -3,7 +3,7 @@
 module.exports = {
 	db: 'mongodb://localhost/hdnotify-dev',
 	app: {
-		title: process.env.APP_TITLE || 'test'
+		title: 'HDNotify DEV - Notification Center'
 	},
 	ldap: {
 		server: process.env.LDAP_SERVER || '',
