@@ -40,7 +40,7 @@
                 <th>Impacted Services</th>
                 <th>Duration (mins)</th>
                 <th>Status</th>
-                <th data-ng-show="authentication.user">Action</th>
+                <th>Action</th>
                 
             </tr>
             </thead>
@@ -55,16 +55,16 @@
                 <td style="width: 25px">{{notice.outage_duration}}</td>
                 <td align="center" ng-switch-when="true">
                 <small class="label label-primary">{{notice.status}}</small>
-                <a ng-hide="authentication.user" href="/#!/notices/{{notice._id}}"><small class="label label-info"><i class="fa fa-eye"></i></small></a>
+                <a ng-hide="authentication.user" href="/#!/notices/{{notice._id}}">
                 </td>
                 <td align="center" ng-switch-default>
                 <small class="label label-default">{{notice.status}}</small>
-                <a ng-hide="authentication.user" href="/#!/notices/{{notice._id}}"><small class="label label-info"><i class="fa fa-eye"></i></small></a>
+                <a ng-hide="authentication.user" href="/#!/notices/{{notice._id}}">
                 </td>
                 <td align="center" ng-switch-when="true" ng-show="authentication.user">
                 <a href="/#!/notices/{{notice._id}}/update"><small class="label label-danger"><i class="fa fa-arrow-circle-o-up"> update</i></small></a>
                 </td>
-                <td align="center" ng-switch-default ng-show="authentication.user">
+                <td align="center" ng-hide="notice.status == 'active' && authentication.user">
                 <a href="/#!/notices/{{notice._id}}"><small class="label label-info"><i class="fa fa-eye"></i></small></a></td>
             </tr> 
             </tbody> 
