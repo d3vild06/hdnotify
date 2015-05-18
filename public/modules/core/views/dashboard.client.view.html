@@ -38,7 +38,7 @@
                 <th>Ticket #</th>
                 <th>Subject</th>
                 <th>Impacted Services</th>
-                <th>Duration</th>
+                <th>Duration (mins)</th>
                 <th>Status</th>
                 <th data-ng-show="authentication.user">Action</th>
                 
@@ -46,7 +46,7 @@
             </thead>
             <tbody>
             <!-- if you want to filter based on status add: filter:{status:'active'} -->
-            <tr data-ng-repeat="notice in notices | startFrom: pagination.page * pagination.perPage | limitTo: pagination.perPage | filter: query | orderBy:'-updated_at'" ng-switch on="notice.status == 'active'">
+            <tr data-ng-repeat="notice in notices | filter: query | orderBy:'-updated_at' | startFrom: pagination.page * pagination.perPage | limitTo: pagination.perPage" ng-switch on="notice.status == 'active'">
                 <td>{{notice.outage_start_time | date: 'medium'}}</td>
                 <td style="width:30px">{{notice.priority}}</td>
                 <td>{{notice.ticket_number}}</td>
