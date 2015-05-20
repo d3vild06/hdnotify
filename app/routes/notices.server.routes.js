@@ -26,7 +26,7 @@ module.exports = function(app) {
 	app.route('/notices/:noticeId')
 		.get(notices.read)
 		.put(users.requiresLogin, notices.update)
-		.delete(notices.delete); // users.requiresLogin, notices.hasAuthorization, 
+		.delete(users.requiresLogin, notices.delete); // users.requiresLogin, notices.hasAuthorization, 
 
 	// Finish by binding the Notice middleware
 	app.param('noticeId', notices.noticeByID);
