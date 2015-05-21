@@ -26,7 +26,7 @@ angular.module('notices').controller('NoticesController', ['$scope', '$confirm',
 
 			});
 			// display confirmation dialog to ensure they really want to submit the notice
-			$confirm({text: 'Are you sure you want to create this notice?'}).then(function() {
+			$confirm({text: 'Are you sure you want to send this notice?'}).then(function() {
 			
 			
 
