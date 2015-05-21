@@ -36,7 +36,7 @@ module.exports = {
 				'public/lib/angular-ui-router/release/angular-ui-router.js',
 				'public/lib/angular-ui-utils/ui-utils.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
-				'public/lib/angular-confirm-1.0/angular-confirm.js',
+				'public/lib/angular-confirm-modal/angular-confirm.js',
 				'public/lib/ng-simplePagination/simplePagination.js',
 				'public/lib/moment/min/moment.min.js',
 				'public/lib/angular-bootstrap-datetimepicker/src/js/datetimepicker.js'
