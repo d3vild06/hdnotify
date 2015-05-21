@@ -8,7 +8,7 @@ angular.module('notices').controller('NoticesController', ['$scope', '$confirm',
 
 		// Create new Notice
 		$scope.create = function() {
-
+			// Create new Notice object
 			var notice = new Notices ({
 				notice_type: this.type,
 				subject: this.noticeForm.subject,
@@ -27,7 +27,7 @@ angular.module('notices').controller('NoticesController', ['$scope', '$confirm',
 			});
 			// display confirmation dialog to ensure they really want to submit the notice
 			$confirm({text: 'Are you sure you want to create this notice?'}).then(function() {
-				// Create new Notice object
+			
 			
 
 			// Redirect after save
