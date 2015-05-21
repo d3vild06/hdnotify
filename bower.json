@@ -19,7 +19,8 @@
     "fontawesome": "~4.2.0",
     "PACE": "https://github.com/HubSpot/pace.git#~0.5.7",
     "angular-bootstrap-datetimepicker": "latest",
-    "ng-simplePagination": "~1.0.3"
+    "ng-simplePagination": "~1.0.3",
+    "angular-confirm-modal": "https://github.com/Schlogen/angular-confirm.git#~1.0.2"
   },
   "resolutions": {
     "angular": "1.2.28"
