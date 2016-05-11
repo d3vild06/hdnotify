@@ -54,14 +54,14 @@ var UserSchema = new Schema({
 		required: 'Please fill in a username',
 		trim: true
 	},
-	// password: {
-	// 	type: String,
-	// 	default: '',
-	// 	validate: [validateLocalStrategyPassword, 'Password should be longer']
-	// },
-	// salt: {
-	// 	type: String
-	// },
+	password: {
+		type: String,
+		default: '',
+		validate: [validateLocalStrategyPassword, 'Password should be longer']
+	},
+	salt: {
+		type: String
+	},
 	provider: {
 		type: String,
 		required: 'Provider is required'
@@ -87,12 +87,12 @@ var UserSchema = new Schema({
 		default: Date.now
 	},
 	/* For reset password */
-	// resetPasswordToken: {
-	// 	type: String
-	// },
-	// resetPasswordExpires: {
-	// 	type: Date
-	// }
+	resetPasswordToken: {
+		type: String
+	},
+	resetPasswordExpires: {
+		type: Date
+	}
 });
 
 /**

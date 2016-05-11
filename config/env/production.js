@@ -8,7 +8,7 @@ module.exports = {
 		keywords: 'MongoDB, Express, AngularJS, Node.js, Web',
 		
 	},
-	version: '0.0.1',
+	version: '1.1.0',
 	port: process.env.PORT || 3000,
 	templateEngine: 'swig',
 	sessionSecret: process.env.SESSION_SECRET || '',
